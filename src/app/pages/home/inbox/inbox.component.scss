@@ -1,0 +1,41 @@
+@import "../../../../theme.scss";
+.container {
+  display: flex;
+  flex-direction: column;
+  max-width: 800px;
+  padding: 0px 10px;
+  margin: 10px auto;
+
+  .conversation-list {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    border-radius: 5px;
+    background-color: $secondary;
+    padding: 10px 10px;
+    margin-bottom: 5px;
+    cursor: pointer;
+    color: $primary;
+
+    .profile-image {
+      max-width: 50px;
+      border-radius: 50%;
+      color: $primary;
+    }
+    .summary {
+      padding-left: 10px;
+      color: $primary;
+
+      .name {
+        font-weight: bold;
+        color: $primary;
+      }
+
+      .last_message {
+        font-weight: 200;
+        color: $primary;
+      }
+    }
+  }
+}

@@ -1,0 +1,21 @@
+<div class="container">
+    <div class="conversations">
+        <div *ngFor="let conversation of conversations">
+            <div class="conversation-list" [routerLink]="['messages']" [state]="conversation">
+                <div class="profile">
+                    <img src="{{conversation.profile_url}}" class="profile-image">
+                </div>
+                <div class="summary">
+                    <div class="name">
+                        {{conversation.name}}
+                    </div>
+                    <div class="last_message">
+                        {{conversation.last_message}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<router-outlet></router-outlet>

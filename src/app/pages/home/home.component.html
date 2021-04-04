@@ -1,0 +1,23 @@
+<div class="container">
+    <div class="toolbar">
+        <mat-toolbar>
+         <button mat-icon-button (click)="drawer.toggle()" aria-label="Menu Icon">
+          <mat-icon>menu</mat-icon>
+        </button>
+        <span style="cursor: pointer;" [routerLink]="['/']">Chat App</span>
+      </mat-toolbar>
+    </div>
+  
+    <div class="content">
+      <mat-drawer-container class="container" autosize>
+        <mat-drawer #drawer class="sidenav" opened="true" mode="side">
+          <app-sidebar></app-sidebar>
+        </mat-drawer>
+      
+        <div>
+          <router-outlet></router-outlet>
+        </div>
+      </mat-drawer-container>
+    </div>
+  
+  </div>

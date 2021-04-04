@@ -1,0 +1,32 @@
+@import "../../../../../theme.scss";
+.sidenav {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 250px;
+
+  .profile-image {
+    border-radius: 50%;
+  }
+  .profile-name {
+    text-align: center;
+    font-weight: bold;
+    padding: 10px 0px;
+    font-size: 18px;
+    color: $primary;
+  }
+  .nav {
+    padding-top: 20px;
+  }
+  .nav-list {
+    padding: 0px 0px 10px 0px;
+    color: $primary;
+  }
+  .nav-item {
+    font-size: 19px;
+  }
+
+  mat-icon {
+    vertical-align: middle;
+  }
+}
