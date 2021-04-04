@@ -10,7 +10,7 @@
   
     <div class="content">
       <mat-drawer-container class="container" autosize>
-        <mat-drawer #drawer class="sidenav" opened="true" mode="side">
+        <mat-drawer #drawer class="sidenav" opened="true" [mode]="mobileQuery.matches ? 'over' : 'side'">
           <app-sidebar></app-sidebar>
         </mat-drawer>
       
