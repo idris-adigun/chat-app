@@ -12,10 +12,10 @@ import {MatInputModule} from '@angular/material/input';
   declarations: [],
   imports: [
     CommonModule,
-    MatButtonModule, MatToolbarModule, MatSidenavModule, MatIconModule, MatButtonModule,MatFormFieldModule,MatInputModule,MatFormFieldModule
+    MatButtonModule, MatToolbarModule, MatSidenavModule, MatIconModule, MatButtonModule,MatFormFieldModule,MatInputModule
   ],
   exports: [
-    MatButtonModule, MatButtonModule,  MatToolbarModule, MatSidenavModule, MatIconModule,  MatButtonModule,MatFormFieldModule,MatInputModule, MatFormFieldModule
+    MatButtonModule, MatButtonModule,  MatToolbarModule, MatSidenavModule, MatIconModule,  MatButtonModule,MatFormFieldModule,MatInputModule
   ]
 })
 export class MatModule { }
