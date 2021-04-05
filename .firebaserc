@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "chatapp-546df": {
+      "hosting": {
+        "chat-app": [
+          "chatapp-546df"
+        ]
+      }
+    }
+  }
+}
