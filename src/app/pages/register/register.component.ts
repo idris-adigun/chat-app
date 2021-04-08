@@ -11,5 +11,9 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
+  register(form){
+    if(form.valid){
+      console.log(form.value)
+    }
+  }
 }
