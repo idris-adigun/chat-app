@@ -10,5 +10,5 @@ export interface UserProfile{
     lastName: string;
     password: string;
     status: boolean;
-    id: string;
+    uid: string;
 }

@@ -31,7 +31,7 @@ export class AuthService {
   createProfile(userProfile,  uid){
     userProfile.password = '';
     userProfile.status = false;
-    userProfile.id = uid
+    userProfile.uid = uid
     this.userProfileCollection = this.afs.collection('UserProfile');
     return new Promise<any>((resolve, reject) => {
         this.userProfileCollection.add(userProfile).then(res =>{
@@ -57,5 +57,35 @@ export class AuthService {
         }
       )
     });
+  }
+
+  
+  checkLogin()
+  {
+      return new Promise((resolve, reject) => {
+        this.auth.onAuthStateChanged(user => {
+           if(user)
+           {
+              resolve(user);
+           }
+           else
+           {
+             reject('not signed in')
+           }
+        });
+     });
+  }
+
+  
+  SignIn(value){
+    return new Promise<any>((resolve, reject) => {
+      this.auth.signInWithEmailAndPassword(value.email, value.password)
+      .then(res => {
+        resolve(res);
+      }, err => {
+        reject(err);
+      }
+      )
+    })
   }
 }

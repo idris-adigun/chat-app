@@ -7,13 +7,13 @@ import { Location } from '@angular/common';
   styleUrls: ['./messages.component.scss']
 })
 export class MessagesComponent implements OnInit {
-  messages;
+  conversation;
   constructor(private location:Location){
   }
  
   ngOnInit():void {
-    this.messages = this.location.getState();
-    console.log(this.location.getState());
+    this.conversation = this.location.getState();
+    console.log(this.conversation);
 
   }
 }

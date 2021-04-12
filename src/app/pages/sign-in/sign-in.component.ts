@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { User } from '../../models/user'
+import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
+import{ UserProfile } from '../../models/user';
 
 @Component({
   selector: 'app-sign-in',
@@ -7,9 +11,34 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SignInComponent implements OnInit {
 
-  constructor() { }
+  user = {} as User;
+  constructor(private auth: AuthService,  private route: Router) {
+
+  }
 
   ngOnInit(): void {
+    this.getLoginStatus();
+  }
+
+  signInUser(form){
+      if(form.valid){
+      this.auth.SignIn(this.user).then(
+        res => {
+          res.user ? this.route.navigate(['/home']) : '';
+        }
+      ).catch(e => {
+        console.log(e);
+      })
+    }
+  }
+
+  getLoginStatus()
+  {
+    this.auth.checkLogin().then((res: UserProfile)  =>{
+      res.uid ? this.route.navigate(['/home']) : '';
+    }).catch(message => {
+      message === 'not signed in' ?  this.route.navigate(['/sign-in']) : '';
+    })
   }
 
 }

@@ -1,1 +1,36 @@
-<p>sign-in works!</p>
+<div class="container">
+    <form #signInForm="ngForm">
+        <div class="header">
+            Sign In
+        </div>
+        <div class="form-group">
+            <mat-form-field class="field email-field">
+              <input matInput placeholder="Email: " [ngClass] = "{'is-invalid': email.errors?.required && email.touched}"
+              [(ngModel)] = "user.email" name="email" #email = "ngModel"    pattern="^[^\s@]+@[^\s@]+\.[^\s@]{2,}$" placeholder="Email" autofocus="" type="text"   required >
+            </mat-form-field>
+            <div *ngIf="email.invalid &&  (email.dirty || email.touched)" class="alert-danger">
+                <div *ngIf="email.errors.pattern">
+                    Please enter a correct email address format.
+                </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <mat-form-field class="field password-field">
+              <input matInput placeholder="please specify: " type="password" [ngClass] = "{'is-invalid': password.errors?.required && password.touched}"
+              [(ngModel)] = "user.password" name="password" #password = "ngModel" placeholder="Password" autofocus=""  inputmode="password" minlength='6' required  >
+            </mat-form-field>
+            <div *ngIf="password.invalid &&  (password.dirty || password.touched)" class="alert-danger">
+                <div *ngIf="password.errors.minlength">
+                    Password must be at least 6 characters long
+                </div>
+            </div>
+          </div>
+          <div>
+              <button mat-button class="btn register-btn"  (click)="signInUser(signInForm)">Sign In</button>
+          </div>
+          <div>
+              No Account? <a [routerLink]="['/register']">Register</a>
+          </div>
+    </form>
+</div>
