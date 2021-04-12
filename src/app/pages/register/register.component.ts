@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../../models/user'
+import { AuthService } from '../../services/auth.service'
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -7,13 +8,33 @@ import { User } from '../../models/user'
 })
 export class RegisterComponent implements OnInit {
   user = {} as User
-  constructor() { }
+  constructor(private auth: AuthService) {
+
+  }
 
   ngOnInit(): void {
   }
-  register(form){
+
+  // Register Use
+  
+  registerUser(form){
     if(form.valid){
-      console.log(form.value)
+      this.auth.Register(this.user).then(
+        res => {
+          // Create user profile is registered
+          if(res.user){
+            this.auth.createProfile(this.user, res.user.uid).then(
+              res => {
+                console.log('Profile created')
+            })
+            .catch(e => {
+              console.log(e)
+            })
+          }
+        }
+      ).catch(e => {
+        console.log(e);
+      })
     }
   }
 }

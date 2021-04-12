@@ -5,8 +5,10 @@ export interface User{
     lastName: string;
 }
 export interface UserProfile{
-    displayedName: string;
+    email: string;
+    firstName: string;
+    lastName: string;
+    password: string;
+    status: boolean;
     id: string;
-    gender: string;
-    status: string;
 }

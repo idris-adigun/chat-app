@@ -8,7 +8,6 @@ import { User, UserProfile } from '../models/user';
   providedIn: 'root'
 })
 export class AuthService {
-
   userProfileCollection: AngularFirestoreCollection<UserProfile>
   userProfiles: Observable<UserProfile[]>;
   constructor(public auth: AngularFireAuth, private afs: AngularFirestore) { }
@@ -29,7 +28,10 @@ export class AuthService {
   }
   
   //create Profile
-  createProfile(userProfile: UserProfile){
+  createProfile(userProfile,  uid){
+    userProfile.password = '';
+    userProfile.status = false;
+    userProfile.id = uid
     this.userProfileCollection = this.afs.collection('UserProfile');
     return new Promise<any>((resolve, reject) => {
         this.userProfileCollection.add(userProfile).then(res =>{

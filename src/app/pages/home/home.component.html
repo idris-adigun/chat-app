@@ -1,12 +1,5 @@
 <div class="container">
-    <div class="toolbar">
-        <mat-toolbar>
-         <button mat-icon-button (click)="drawer.toggle()" aria-label="Menu Icon">
-          <mat-icon>menu</mat-icon>
-        </button>
-        <span style="cursor: pointer;" [routerLink]="['/']">Chat App</span>
-      </mat-toolbar>
-    </div>
+    <app-toolbar [drawer]="drawer"></app-toolbar>
   
     <div class="content">
       <mat-drawer-container class="container" autosize>

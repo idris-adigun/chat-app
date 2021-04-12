@@ -16,7 +16,7 @@ import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 // Angular Material
-import { MatModule } from './module/mat/mat.module'
+import { MatModule } from './module/mat/mat.module';
 
 
 @NgModule({
@@ -24,7 +24,7 @@ import { MatModule } from './module/mat/mat.module'
     AppComponent,
     RegisterComponent,
     SignInComponent,
-    ForgotPasswordComponent
+    ForgotPasswordComponent,
   ],
   imports: [
     BrowserModule,
