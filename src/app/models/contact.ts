@@ -1,5 +1,8 @@
 export interface Contact{
-    displayedName: string;
+    firstName: string;
+    lastName: string;
+    requestStatus: boolean;
+    dateAdded: Date;
     email: string;
     id: string;
     
