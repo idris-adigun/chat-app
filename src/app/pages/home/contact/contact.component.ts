@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { ViewContactComponent } from './view-contact/view-contact.component'
 @Component({
   selector: 'app-contact',
   templateUrl: './contact.component.html',
   styleUrls: ['./contact.component.scss']
 })
 export class ContactComponent implements OnInit {
-
+  myColor="#fff";
   contacts = [
     {
       id: 'dafhsdhshdh',
@@ -21,9 +22,17 @@ export class ContactComponent implements OnInit {
       dateAdded: new Date()
     }
   ]
-  constructor() { }
+  constructor(public dialog: MatDialog) { }
 
   ngOnInit(): void {
+  }
+
+  openDialog(contact): void {
+   this.dialog.open(ViewContactComponent, {
+      width: '500px',
+      data: contact
+    });
+    
   }
 
 }

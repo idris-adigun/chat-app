@@ -25,15 +25,25 @@
     align-items: center;
     border-radius: 5px;
     margin-top: 10px;
-    background-color: $secondary;
+    background-color: $card-color;
     padding: 10px 10px;
     cursor: pointer;
     color: $primary;
-
-    .name {
-      font-weight: bold;
+    .summary {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      width: 100%;
       color: $primary;
-      padding-left: 10px;
+
+      .name {
+        font-weight: bold;
+        color: $primary;
+        padding-left: 10px;
+      }
+      .view-contact {
+        font-weight: bold;
+      }
     }
 
     .profile-image {
