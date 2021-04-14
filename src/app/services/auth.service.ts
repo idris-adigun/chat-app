@@ -28,8 +28,10 @@ export class AuthService {
   }
   
   //create Profile
-  createProfile(userProfile,  uid){
-    userProfile.password = '';
+  createProfile({email, username},  uid){
+    let userProfile = {} as UserProfile;
+    userProfile.email = email;
+    userProfile.username = username;
     userProfile.status = false;
     userProfile.uid = uid
     this.userProfileCollection = this.afs.collection('UserProfile');

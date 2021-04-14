@@ -1,6 +1,5 @@
 export interface Contact{
-    firstName: string;
-    lastName: string;
+    username: string;
     requestStatus: boolean;
     dateAdded: Date;
     email: string;
