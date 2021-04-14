@@ -7,6 +7,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ContactComponent implements OnInit {
 
+  contacts = [
+    {
+      id: 'dafhsdhshdh',
+      username: 'Kelly',
+      profile_url: 'https://source.unsplash.com/random/200x200?sig=1',
+      dateAdded: new Date()
+    },
+    {
+      id: 'dafhsdhshdh',
+      username: 'John',
+      profile_url: 'https://source.unsplash.com/random/200x200?sig=2',
+      dateAdded: new Date()
+    }
+  ]
   constructor() { }
 
   ngOnInit(): void {

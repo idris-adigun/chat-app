@@ -6,16 +6,16 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatIconModule} from '@angular/material/icon';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
-
+import {MatTabsModule} from '@angular/material/tabs';
 
 @NgModule({
   declarations: [],
   imports: [
     CommonModule,
-    MatButtonModule, MatToolbarModule, MatSidenavModule, MatIconModule, MatButtonModule,MatFormFieldModule,MatInputModule
+    MatButtonModule, MatToolbarModule, MatSidenavModule, MatIconModule, MatButtonModule,MatFormFieldModule,MatInputModule,MatTabsModule
   ],
   exports: [
-    MatButtonModule, MatButtonModule,  MatToolbarModule, MatSidenavModule, MatIconModule,  MatButtonModule,MatFormFieldModule,MatInputModule
+    MatButtonModule, MatButtonModule,  MatToolbarModule, MatSidenavModule, MatIconModule,  MatButtonModule,MatFormFieldModule,MatInputModule,MatTabsModule
   ]
 })
 export class MatModule { }

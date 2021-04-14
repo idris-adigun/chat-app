@@ -1,0 +1,45 @@
+@import "../../../../theme.scss";
+.container {
+  display: flex;
+  flex-direction: column;
+  max-width: 800px;
+  padding: 0px 10px;
+  margin: 10px auto;
+
+  div.mat-tab-label-content {
+    font-weight: 800 !important;
+    font-size: 21px;
+  }
+  .btn {
+    font-weight: 600;
+    font-size: 21px;
+    text-align: left;
+  }
+  .add-section {
+    margin-bottom: 10px;
+  }
+  .contact-list {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    border-radius: 5px;
+    margin-top: 10px;
+    background-color: $secondary;
+    padding: 10px 10px;
+    cursor: pointer;
+    color: $primary;
+
+    .name {
+      font-weight: bold;
+      color: $primary;
+      padding-left: 10px;
+    }
+
+    .profile-image {
+      max-width: 50px;
+      border-radius: 50%;
+      color: $primary;
+    }
+  }
+}

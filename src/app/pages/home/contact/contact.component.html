@@ -1,1 +1,24 @@
-<p>contact works!</p>
+<div class="container">
+    <mat-tab-group>
+        <mat-tab label="My Contact">
+            <div class="contact">
+                <div *ngFor="let contact of contacts">
+                    <div class="contact-list" [routerLink]="['messages']" [state]="contact">
+                        <div class="profile">
+                            <img src="{{contact.profile_url}}" class="profile-image">
+                        </div>
+                        <div class="summary">
+                            <div class="name">
+                                {{contact.username}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </mat-tab>
+        <mat-tab label="Pending Requests"></mat-tab>
+        <mat-tab label="Add Contact"></mat-tab>
+      </mat-tab-group>
+</div>
+
+<router-outlet></router-outlet>
