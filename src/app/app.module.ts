@@ -24,7 +24,7 @@ import { MatModule } from './module/mat/mat.module';
     AppComponent,
     RegisterComponent,
     SignInComponent,
-    ForgotPasswordComponent,
+    ForgotPasswordComponent
   ],
   imports: [
     BrowserModule,

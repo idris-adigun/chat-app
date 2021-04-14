@@ -5,7 +5,7 @@ import { HomeRoutingModule } from './home-routing.module';
 import { SidebarComponent } from './sidebar/sidebar/sidebar.component';
 import { HomeComponent } from './home.component';
 import { MatModule } from '../../module/mat/mat.module';
-import { ToolbarComponent } from './toolbar/toolbar.component'
+import { ToolbarComponent } from './toolbar/toolbar.component';
 
 @NgModule({
   declarations: [
