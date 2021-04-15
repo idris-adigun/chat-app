@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import{UserProfile } from '../../.../../../../models/user';
+import{UserProfile } from '../../../../shared/models/user.model';
 
 @Component({
   selector: 'app-sidebar',

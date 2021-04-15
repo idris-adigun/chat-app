@@ -2,8 +2,11 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { ChangeDetectorRef,  OnDestroy } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
-import{ UserProfile } from '../../models/user';
+import{ UserProfile } from '../../shared/models/user.model';
 import { Router } from '@angular/router';
+import { Store } from '@ngxs/store';
+import { setUserProfile } from '../../shared/actions/user.actions'
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -17,7 +20,7 @@ export class HomeComponent implements OnInit {
   uid: string;
   userProfile = {} as UserProfile;
 
-  constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, private auth: AuthService, private route: Router) {
+  constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, private auth: AuthService, private route: Router, private store: Store) {
     
     //Modify sidebar type on the screen size
     this.mobileQuery = media.matchMedia('(max-width: 900px)');
@@ -48,8 +51,13 @@ export class HomeComponent implements OnInit {
   getUserProfile(){
     this.auth.getUserProfile(this.uid).subscribe(res =>{
        this.userProfile = res[0];
+       this.setUserProfile(this.userProfile)
     })
-    
+  }
+
+  // Add user profile to the state
+  setUserProfile(userProfile: UserProfile){
+    this.store.dispatch(new setUserProfile(userProfile))
   }
 
 }

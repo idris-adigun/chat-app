@@ -19,6 +19,13 @@ import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password
 // Angular Material
 import { MatModule } from './module/mat/mat.module';
 
+// NGXS Module
+import { NgxsModule } from '@ngxs/store';
+import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
+import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
+
+// State
+import { UserProfileState } from './shared/state/user.state'
 
 @NgModule({
   declarations: [
@@ -36,7 +43,10 @@ import { MatModule } from './module/mat/mat.module';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     AngularFireAuthModule,
-    MatModule
+    MatModule,
+    NgxsModule.forRoot([UserProfileState]),
+    NgxsReduxDevtoolsPluginModule.forRoot(),
+    NgxsLoggerPluginModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

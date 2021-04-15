@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Select } from '@ngxs/store';
 
 @Component({
   selector: 'app-inbox',
@@ -6,7 +7,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./inbox.component.scss']
 })
 export class InboxComponent implements OnInit {
-  userProfile;
+  // Get userProfile State
+  @Select() userProfile$;
+
   conversations = [
     {
       name: 'Kelly',
@@ -49,7 +52,7 @@ export class InboxComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.userProfile);
+    this.userProfile$.subscribe(res => console.log(res))
   }
 
 }

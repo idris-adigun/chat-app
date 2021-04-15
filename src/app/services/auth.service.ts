@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
-import { User, UserProfile } from '../models/user';
+import { User, UserProfile } from '../shared/models/user.model';
 import { map } from 'rxjs/operators';
 
 @Injectable({
