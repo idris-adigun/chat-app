@@ -3,7 +3,6 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { User, UserProfile } from '../models/user';
-import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +10,6 @@ import { map } from 'rxjs/operators';
 export class AuthService {
   userProfileCollection: AngularFirestoreCollection<UserProfile>
   userProfiles: Observable<UserProfile[]>;
-  profiles: Observable<UserProfile[]>;
   constructor(public auth: AngularFireAuth, private afs: AngularFirestore) { }
 
   // Register
@@ -49,7 +47,8 @@ export class AuthService {
 
   //Login 
   login(user: User){
-    return new Promise<any>((resolve, reject) =>{
+    return new Promise<any>((resolve, reject) =>
+    {
       this.auth.signInWithEmailAndPassword(user.email, user.password).then(
         res =>
         {
@@ -60,21 +59,6 @@ export class AuthService {
         }
       )
     });
-  }
-
-
-  getUserProfile(uid){
-    console.log(uid)
-    this.userProfileCollection = this.afs.collection<UserProfile>('UserProfile', ref => {
-      return ref.where('uid', '==', uid);
-    });
-    this.profiles = this.userProfileCollection.snapshotChanges().pipe(
-      map(actions => actions.map(res => {
-        const data = res.payload.doc.data() as UserProfile;
-        return data;
-      }))
-    )
-    return this.profiles;
   }
 
   
