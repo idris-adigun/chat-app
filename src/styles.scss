@@ -1,5 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 @import "./theme.scss";
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined");
 * {
   margin: 0;
   padding: 0;
@@ -9,8 +10,34 @@
 
 html,
 body {
-  margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
   background-color: $background-color;
   height: 100%;
+}
+
+.mat-tab-group.mat-primary .mat-ink-bar,
+.mat-tab-nav-bar.mat-primary .mat-ink-bar {
+  background: $accent;
+  color: $primary;
+}
+
+.mat-tab-label {
+  color: $primary;
+}
+.mat-focused .mat-form-field-label {
+  /*change color of label*/
+  color: $primary !important;
+}
+
+.mat-form-field-underline {
+  /*change color of underline*/
+  background-color: $primary !important;
+}
+
+.mat-form-field-ripple {
+  /*change color of underline when focused*/
+  background-color: $primary !important;
+}
+.mat-raised-button {
+  background-color: $background-color;
+  color: $primary;
 }

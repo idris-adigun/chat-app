@@ -1,5 +1,5 @@
 <div class="container">
-    <mat-tab-group>
+    <mat-tab-group  animationDuration="200ms">
         <mat-tab label="My Contact">
             <div class="contact">
                 <div *ngFor="let contact of contacts">
@@ -12,6 +12,7 @@
                                 {{contact.username}}
                             </div>
                             <div class="view-contact ">
+                                <mat-icon>chat_bubble_outline</mat-icon>
                                 <mat-icon (click)="openDialog(contact)">launch</mat-icon>
                             </div>
                         </div>
@@ -19,9 +20,11 @@
                 </div>
             </div>
         </mat-tab>
-        <mat-tab label="Pending Requests"></mat-tab>
-        <mat-tab label="Add Contact"></mat-tab>
+        <mat-tab label="Pending Requests">
+            <app-pending-contact></app-pending-contact>
+        </mat-tab>
+        <mat-tab label="Add Contact">
+            <app-add-contact></app-add-contact>
+        </mat-tab>
       </mat-tab-group>
 </div>
-
-<router-outlet></router-outlet>

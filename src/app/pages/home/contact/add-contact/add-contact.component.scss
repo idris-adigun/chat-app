@@ -1,0 +1,19 @@
+@import "../../../../../theme.scss";
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  margin-bottom: 20px;
+
+  .search-form {
+    margin-top: 5px;
+    color: $primary;
+
+    .input-field {
+      width: 100%;
+    }
+  }
+  .search-btn {
+    width: 100%;
+  }
+}
