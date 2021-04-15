@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./inbox.component.scss']
 })
 export class InboxComponent implements OnInit {
-
+  userProfile;
   conversations = [
     {
       name: 'Kelly',
@@ -45,9 +45,11 @@ export class InboxComponent implements OnInit {
       date_sent: new Date()
     }
   ]
-  constructor() { }
+  constructor() { 
+  }
 
   ngOnInit(): void {
+    console.log(this.userProfile);
   }
 
 }

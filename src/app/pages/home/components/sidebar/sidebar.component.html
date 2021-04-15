@@ -3,7 +3,7 @@
   <div class="sidenav">
     <div class="profile">
       <div>
-        <img src="https://source.unsplash.com/random/200x200?sig=100'" class="profile-image">
+        <img src="{{userProfile.profileImageUrl}}" class="profile-image">
       </div>
       <div class="profile-name">
         {{userProfile.username}}
@@ -16,7 +16,7 @@
           <button mat-button class="nav-item"  [routerLink]="['/']">Home <mat-icon inline="true" class="material-icons-outlined">home</mat-icon></button>
         </li>
         <li class="nav-list">
-          <button mat-button class="nav-item"  [routerLink]="['inbox']">Inbox <mat-icon inline="true">inbox</mat-icon></button>
+          <button mat-button class="nav-item"  [routerLink]="['inbox']" [state]="userProfile">Inbox <mat-icon inline="true">inbox</mat-icon></button>
         </li>
         <li class="nav-list">
           <button mat-button class="nav-item"   [routerLink]="['contact']">Contact <mat-icon inline="true" class="material-icons-outlined">contact_page</mat-icon></button>

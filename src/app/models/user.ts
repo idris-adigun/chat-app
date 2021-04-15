@@ -8,4 +8,5 @@ export interface UserProfile{
     username: string;
     status: boolean;
     uid: string;
+    profileImageUrl: string;
 }
