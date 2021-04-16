@@ -4,7 +4,7 @@
           <div class="form-group">
             <mat-form-field class="field username-field">
               <input matInput type="text" [ngClass] = "{'is-invalid': username.errors?.required && username.touched}"
-              [(ngModel)] = "contact.username" name="username" #username = "ngModel" placeholder="username" autofocus=""  inputmode="text" minlength='2' required  >
+              [(ngModel)] = "user.username" name="username" #username = "ngModel" placeholder="username" autofocus=""  inputmode="text" minlength='2' required  >
             </mat-form-field>
             <div *ngIf="username.invalid &&  (username.dirty || username.touched)" class="alert-danger">
                 <div *ngIf="username.errors.minlength">
@@ -17,18 +17,18 @@
             <button [disabled]="submitBtnStatus" mat-raised-button class="search-btn" (click)="searchDirectory(searchContactForm)">Search Directory</button>
         </div>
     </div>
-    <div *ngIf="contacts">
-      <div class="contact-list"  *ngFor="let contact of contacts;  index as i">
+    <div *ngIf="users">
+      <div class="contact-list"  *ngFor="let user of users;  index as i">
             <div class="profile">
-                <img src="{{contact.profileImageUrl}}" class="profile-image">
+                <img src="{{user.profileImageUrl}}" class="profile-image">
             </div>
             <div class="summary">
                 <div class="name">
-                    {{contact.username}}
+                    {{user.username}}
                 </div>
                 <div class="view-contact ">
                   <mat-icon >launch</mat-icon>
-                  <mat-icon>add</mat-icon>
+                  <mat-icon (click)="sendAddRequest(user)">add</mat-icon>
                 </div>
             </div>
        </div>

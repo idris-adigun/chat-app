@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ContactService } from './../../../../services/contact/contact.service';
+import { User, UserProfile } from '../../../../shared/models/user.model';
 import { Contact } from '../../../../shared/models/contact.model';
 import { Select } from '@ngxs/store';
 @Component({
@@ -8,8 +9,8 @@ import { Select } from '@ngxs/store';
   styleUrls: ['./add-contact.component.scss']
 })
 export class AddContactComponent implements OnInit {
-  contact = {} as Contact;
-  contacts: Contact[];
+  user = {} as UserProfile;
+  users: UserProfile[];
   submitBtnStatus : boolean = false;
   @Select() userProfile$;
   uid: string = '';
@@ -29,12 +30,20 @@ export class AddContactComponent implements OnInit {
       this.submitBtnStatus = true;
       this.contactService.getContact(form.value.username, this.uid).subscribe(
         res => {
-          this.contacts = res;
-          console.log(this.contacts);
+          this.users = res;
+          console.log(this.users);
           this.submitBtnStatus = false;
         }
       )
     }
+  }
+
+  sendAddRequest(user: UserProfile){
+
+    this.contactService.sendAddRequest(user, this.uid).then(
+      res=> console.log(res)
+    )
+
   }
 
 }
