@@ -1,7 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { ChangeDetectorRef,  OnDestroy } from '@angular/core';
-import { AuthService } from '../../services/auth.service';
+import { AuthService } from '../../services/auth/auth.service';
 import{ UserProfile } from '../../shared/models/user.model';
 import { Router } from '@angular/router';
 import { Store } from '@ngxs/store';

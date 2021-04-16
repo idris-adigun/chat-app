@@ -1,12 +1,37 @@
   <div class="container">
     <div>
-        <form class="search-form">
-            <mat-form-field class="input-field">
-              <input matInput placeholder="Ex. Username" value="">
+        <form class="search-form" #searchContactForm="ngForm">
+          <div class="form-group">
+            <mat-form-field class="field username-field">
+              <input matInput type="text" [ngClass] = "{'is-invalid': username.errors?.required && username.touched}"
+              [(ngModel)] = "contact.username" name="username" #username = "ngModel" placeholder="username" autofocus=""  inputmode="text" minlength='2' required  >
             </mat-form-field>
+            <div *ngIf="username.invalid &&  (username.dirty || username.touched)" class="alert-danger">
+                <div *ngIf="username.errors.minlength">
+                    Username must be at least 2 characters long
+                </div>
+            </div>
+          </div>
         </form>
         <div>
-            <button mat-raised-button class="search-btn">Search Directory</button>
+            <button [disabled]="submitBtnStatus" mat-raised-button class="search-btn" (click)="searchDirectory(searchContactForm)">Search Directory</button>
         </div>
+    </div>
+    <div *ngIf="contacts">
+      <div class="contact-list"  *ngFor="let contact of contacts">
+          <div class="profile">
+              <img src="{{contact.profileImageUrl}}" class="profile-image">
+          </div>
+          <div class="summary">
+              <div class="name">
+                  {{contact.username}}
+              </div>
+              <div class="view-contact ">
+                <mat-icon >launch</mat-icon>
+                <mat-icon>add</mat-icon>
+              </div>
+          </div>
+      </div>
+
     </div>
   </div>

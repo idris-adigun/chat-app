@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { ContactRoutingModule } from './contact-routing.module';
 import { ContactComponent } from './contact.component';
@@ -14,7 +15,9 @@ import { PendingContactComponent } from './pending-contact/pending-contact.compo
   imports: [
     CommonModule,
     ContactRoutingModule,
-    MatModule
+    MatModule,
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class ContactModule { }

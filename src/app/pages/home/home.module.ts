@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { HomeRoutingModule } from './home-routing.module';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
@@ -16,7 +17,9 @@ import { ToolbarComponent } from './components/toolbar/toolbar.component';
   imports: [
     CommonModule,
     HomeRoutingModule,
-    MatModule
+    MatModule,
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class HomeModule { }

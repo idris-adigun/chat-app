@@ -3,6 +3,8 @@ export interface Contact{
     requestStatus: boolean;
     dateAdded: Date;
     email: string;
-    id: string;
+    status: boolean;
+    uid: string;
+    profileImageUrl: string;
     
 }

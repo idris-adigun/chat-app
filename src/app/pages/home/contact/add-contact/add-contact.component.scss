@@ -9,11 +9,49 @@
     margin-top: 5px;
     color: $primary;
 
-    .input-field {
+    .username-field {
       width: 100%;
     }
   }
   .search-btn {
     width: 100%;
+  }
+  .contact-list {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    border-radius: 5px;
+    margin-top: 10px;
+    background-color: $card-color;
+    padding: 10px 10px;
+    cursor: pointer;
+    color: $primary;
+    .summary {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      width: 100%;
+      color: $primary;
+
+      .name {
+        font-weight: bold;
+        color: $primary;
+        padding-left: 10px;
+      }
+      .view-contact {
+        font-weight: bold;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        gap: 12px;
+      }
+    }
+
+    .profile-image {
+      max-width: 50px;
+      border-radius: 50%;
+      color: $primary;
+    }
   }
 }

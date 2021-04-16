@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
-import { User, UserProfile } from '../shared/models/user.model';
+import { User, UserProfile } from '../../shared/models/user.model';
 import { map } from 'rxjs/operators';
 
 @Injectable({
@@ -63,9 +63,8 @@ export class AuthService {
     });
   }
 
-
+// Get user Profile by user ID
   getUserProfile(uid){
-    console.log(uid)
     this.userProfileCollection = this.afs.collection<UserProfile>('UserProfile', ref => {
       return ref.where('uid', '==', uid);
     });
