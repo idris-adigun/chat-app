@@ -14,10 +14,10 @@ export class ContactService {
   constructor(public auth: AngularFireAuth, private afs: AngularFirestore) { }
 
   // get contact by username
-  getContact(userName){
-    console.log(userName)
+  // TODO: Filter out if already added in my contact list
+  getContact(userName, uid){
     this.contactCollection = this.afs.collection<Contact>('UserProfile', ref => {
-      return ref.where('username', '==', userName)
+      return ref.where('username', '==', userName).where('uid', '!=', uid)
     });
     return this.contactCollection.snapshotChanges().pipe(
         map(actions => actions.map(res => {
