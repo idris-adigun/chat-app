@@ -21,7 +21,6 @@ export class HomeComponent implements OnInit {
   userProfile = {} as UserProfile;
 
   constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, private auth: AuthService, private route: Router, private store: Store) {
-    
     //Modify sidebar type on the screen size
     this.mobileQuery = media.matchMedia('(max-width: 900px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
@@ -37,8 +36,7 @@ export class HomeComponent implements OnInit {
   }
 
   //check if user is logged in
- checkLoginStatus()
-  {
+ checkLoginStatus(){
     this.auth.checkLogin().then((res: UserProfile)  =>{
       this.uid = res.uid;
       this.getUserProfile();

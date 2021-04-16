@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ContactService } from './../../../../services/contact/contact.service';
-import { User, UserProfile } from '../../../../shared/models/user.model';
+import { UserProfile } from '../../../../shared/models/user.model';
 import { Contact } from '../../../../shared/models/contact.model';
 import { Select } from '@ngxs/store';
 @Component({
@@ -11,6 +11,8 @@ import { Select } from '@ngxs/store';
 export class AddContactComponent implements OnInit {
   user = {} as UserProfile;
   users: UserProfile[];
+  contact = {} as Contact;
+
   submitBtnStatus : boolean = false;
   @Select() userProfile$;
   uid: string = '';
@@ -18,7 +20,6 @@ export class AddContactComponent implements OnInit {
   constructor(private contactService : ContactService) { 
     this.userProfile$.subscribe(res => {
       this.uid = res.userProfile.uid;
-      console.log(this.uid)
     })
   }
 
@@ -28,7 +29,7 @@ export class AddContactComponent implements OnInit {
   searchDirectory(form){
     if(form.valid){
       this.submitBtnStatus = true;
-      this.contactService.getContact(form.value.username, this.uid).subscribe(
+      this.contactService.searchDirectory(form.value.username, this.uid).subscribe(
         res => {
           this.users = res;
           console.log(this.users);
@@ -38,12 +39,18 @@ export class AddContactComponent implements OnInit {
     }
   }
 
-  sendAddRequest(user: UserProfile){
-
-    this.contactService.sendAddRequest(user, this.uid).then(
+  addToContact(user: Contact){
+    let currDate = new Date();
+    this.contact =  {
+      email: user.email,
+      username: user.username,
+      profileImageUrl: user.profileImageUrl,
+      uid: user.uid,
+      dateAdded: currDate
+    }
+    this.contactService.addToContact(this.contact, this.uid).then(
       res=> console.log(res)
-    )
-
+    );
   }
 
 }

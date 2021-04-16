@@ -1,4 +1,7 @@
 export interface Contact{
-    requestStatus: boolean;
+    email: string;
+    username: string;
+    profileImageUrl: string;
     uid: string;
+    dateAdded: Date;
 }

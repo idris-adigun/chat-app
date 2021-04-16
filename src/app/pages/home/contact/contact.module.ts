@@ -7,11 +7,11 @@ import { ContactComponent } from './contact.component';
 import { MatModule } from '../../../module/mat/mat.module';
 import { ViewContactComponent } from './view-contact/view-contact.component';
 import { AddContactComponent } from './add-contact/add-contact.component';
-import { PendingContactComponent } from './pending-contact/pending-contact.component';
+import { MyContactComponent } from './my-contact/my-contact.component';
 
 
 @NgModule({
-  declarations: [ContactComponent, ViewContactComponent, AddContactComponent, PendingContactComponent],
+  declarations: [ContactComponent, ViewContactComponent, AddContactComponent, MyContactComponent],
   imports: [
     CommonModule,
     ContactRoutingModule,
