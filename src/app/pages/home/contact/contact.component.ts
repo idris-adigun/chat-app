@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Select } from '@ngxs/store';
 
 @Component({
   selector: 'app-contact',
@@ -7,13 +6,10 @@ import { Select } from '@ngxs/store';
   styleUrls: ['./contact.component.scss']
 })
 export class ContactComponent implements OnInit {
-  @Select() userProfile$;
-  constructor() { 
-  }
 
+  constructor() {  
+  }
+  
   ngOnInit(): void {
   }
-
-
-
 }

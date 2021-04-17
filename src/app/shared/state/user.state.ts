@@ -14,7 +14,7 @@ export class UserProfileStateModel {
             username: '',
             status: false,
             uid: '',
-            profileImageUrl: '',
+            profileImageUrl: ''
         }
     }
 })
@@ -23,7 +23,7 @@ export class UserProfileState{
 
     @Selector()
     static getUserProfile(state: UserProfileStateModel) {
-        return state;
+        return state.userProfile;
     }
 
     @Action(setUserProfile)

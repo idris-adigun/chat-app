@@ -1,5 +1,5 @@
 <div class="contact">
-    <div *ngFor="let contact of contacts">
+    <div *ngFor="let contact of contactDetails">
         <div class="contact-list">
             <div class="profile">
                 <img src="{{contact.profileImageUrl}}" class="profile-image">
@@ -9,7 +9,7 @@
                     {{contact.username}}
                 </div>
                 <div class="view-contact ">
-                    <mat-icon>chat_bubble_outline</mat-icon>
+                    <mat-icon (click)="openMessageDialog(contact)">chat_bubble_outline</mat-icon>
                     <mat-icon (click)="openDialog(contact)">launch</mat-icon>
                 </div>
             </div>

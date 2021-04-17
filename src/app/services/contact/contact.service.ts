@@ -54,6 +54,5 @@ export class ContactService {
         return data
       }))
     )
-
   }
 }

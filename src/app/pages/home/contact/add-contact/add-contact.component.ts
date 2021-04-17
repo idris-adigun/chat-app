@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ContactService } from './../../../../services/contact/contact.service';
 import { UserProfile } from '../../../../shared/models/user.model';
 import { Contact } from '../../../../shared/models/contact.model';
@@ -9,18 +9,16 @@ import { Select } from '@ngxs/store';
   styleUrls: ['./add-contact.component.scss']
 })
 export class AddContactComponent implements OnInit {
+  @Select() userProfile$;
+  @Select() contact$;
+  uid;
   user = {} as UserProfile;
   users: UserProfile[];
   contact = {} as Contact;
 
   submitBtnStatus : boolean = false;
-  @Select() userProfile$;
-  uid: string = '';
 
   constructor(private contactService : ContactService) { 
-    this.userProfile$.subscribe(res => {
-      this.uid = res.userProfile.uid;
-    })
   }
 
   ngOnInit(): void {
@@ -29,28 +27,42 @@ export class AddContactComponent implements OnInit {
   searchDirectory(form){
     if(form.valid){
       this.submitBtnStatus = true;
-      this.contactService.searchDirectory(form.value.username, this.uid).subscribe(
-        res => {
-          this.users = res;
-          console.log(this.users);
-          this.submitBtnStatus = false;
-        }
-      )
-    }
+      this.getUserId().then(uid => {
+        this.contactService.searchDirectory(form.value.username, uid).subscribe(
+          res => {
+            this.users = res;
+            console.log(this.users);
+            this.submitBtnStatus = false;
+          }
+        )
+      });
   }
+}
+
+  getUserId(){
+    return new Promise<any>((resolve, reject) => {
+        this.userProfile$.subscribe(res => {
+          res.userProfile.uid ?
+            resolve(res.userProfile.uid)
+            : reject(null)
+        })
+    })
+  }
+
 
   addToContact(user: Contact){
     let currDate = new Date();
     this.contact =  {
-      email: user.email,
-      username: user.username,
-      profileImageUrl: user.profileImageUrl,
       uid: user.uid,
       dateAdded: currDate
     }
-    this.contactService.addToContact(this.contact, this.uid).then(
-      res=> console.log(res)
-    );
+    console.log(this.contact)
+    this.getUserId().then(uid => {
+      this.contactService.addToContact(this.contact, uid).then(
+        res=> console.log(res)
+      );
+
+    })
   }
 
 }

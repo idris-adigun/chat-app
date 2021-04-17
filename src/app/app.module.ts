@@ -26,6 +26,7 @@ import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
 
 // State
 import { UserProfileState } from './shared/state/user.state'
+import { ContactState } from './shared/state/contact.state'
 
 @NgModule({
   declarations: [
@@ -44,7 +45,7 @@ import { UserProfileState } from './shared/state/user.state'
     AngularFirestoreModule,
     AngularFireAuthModule,
     MatModule,
-    NgxsModule.forRoot([UserProfileState]),
+    NgxsModule.forRoot([UserProfileState,ContactState]),
     NgxsReduxDevtoolsPluginModule.forRoot(),
     NgxsLoggerPluginModule.forRoot()
   ],
