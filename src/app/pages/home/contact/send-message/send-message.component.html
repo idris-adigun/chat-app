@@ -1,0 +1,18 @@
+<!-- <p>sender: {{sendId}}</p>
+<p>recipient: {{recipientId}}</p> -->
+
+<div class="container">
+    <div>
+        <form class="message-form" #messageForm="ngForm">
+          <div class="form-group">
+            <mat-form-field class="field message-field">
+              <input matInput type="text" [ngClass] = "{'is-invalid': message.errors?.required && message.touched}"
+              [(ngModel)] = "content.message" name="message" #message = "ngModel" placeholder="message" autofocus=""  inputmode="text"  required  >
+            </mat-form-field>
+          </div>
+        </form>
+        <div>
+            <button [disabled]="submitBtnStatus" mat-raised-button class="search-btn" (click)="sendMessage(messageForm)">Send</button>
+        </div>
+    </div>
+  </div>

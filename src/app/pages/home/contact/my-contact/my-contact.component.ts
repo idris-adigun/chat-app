@@ -1,11 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
 import { ViewContactComponent } from './../view-contact/view-contact.component';
+import { SendMessageComponent } from '../send-message/send-message.component';
 import { Contact } from '../../../../shared/models/contact.model';
 import { ContactService } from './../../../../services/contact/contact.service';
 import { AuthService } from './../../../../services/auth/auth.service';
 import { Select } from '@ngxs/store';
-import { SendMessageComponent } from '../../components/send-message/send-message.component';
 import { first } from 'rxjs/operators';
 
 @Component({

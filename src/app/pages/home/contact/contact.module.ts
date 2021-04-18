@@ -8,10 +8,16 @@ import { MatModule } from '../../../module/mat/mat.module';
 import { ViewContactComponent } from './view-contact/view-contact.component';
 import { AddContactComponent } from './add-contact/add-contact.component';
 import { MyContactComponent } from './my-contact/my-contact.component';
+import { SendMessageComponent } from './send-message/send-message.component';
 
 
 @NgModule({
-  declarations: [ContactComponent, ViewContactComponent, AddContactComponent, MyContactComponent],
+  declarations: [
+    ContactComponent, 
+    ViewContactComponent, 
+    AddContactComponent, 
+    MyContactComponent, 
+    SendMessageComponent],
   imports: [
     CommonModule,
     ContactRoutingModule,
