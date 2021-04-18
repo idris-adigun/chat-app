@@ -1,0 +1,23 @@
+@import "../../../../../theme.scss";
+.contact {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  background-color: $background-color;
+  color: $primary;
+
+  .profile-img {
+    border-radius: 50%;
+    max-width: 200px;
+  }
+  .info {
+    .info-section {
+      padding: 10px 0px;
+      //   border-bottom: 1px dashed $primary;
+      //   text-align: left;
+      .label {
+        font-weight: 700;
+      }
+    }
+  }
+}

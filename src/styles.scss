@@ -41,3 +41,6 @@ body {
   background-color: $background-color;
   color: $primary;
 }
+mat-dialog-container {
+  background: $background-color !important;
+}

@@ -47,7 +47,7 @@ export class MyContactComponent implements OnInit {
   
   openDialog(contact): void {
    this.dialog.open(ViewContactComponent, {
-      width: '500px',
+      width: '300px',
       data: contact
     });
   }

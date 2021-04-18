@@ -9,6 +9,7 @@ import { Select } from '@ngxs/store';
 export class InboxComponent implements OnInit {
   // Get userProfile State
   @Select() userProfile$;
+  userDetails
 
   conversations = [
     {
@@ -52,7 +53,7 @@ export class InboxComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.userProfile$.subscribe(res => console.log(res))
+    this.userProfile$.subscribe(res => this.userDetails = res)
   }
 
 }

@@ -1,9 +1,11 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import {MatDialog} from '@angular/material/dialog';
 import { ContactService } from './../../../../services/contact/contact.service';
 import { UserProfile } from '../../../../shared/models/user.model';
 import { Contact } from '../../../../shared/models/contact.model';
 import { Select } from '@ngxs/store';
 import { first } from 'rxjs/operators';
+import { ViewContactComponent } from '../view-contact/view-contact.component';
 @Component({
   selector: 'app-add-contact',
   templateUrl: './add-contact.component.html',
@@ -20,7 +22,7 @@ export class AddContactComponent implements OnInit {
 
   submitBtnStatus : boolean = false;
 
-  constructor(private contactService : ContactService) { 
+  constructor(public dialog: MatDialog, private contactService : ContactService) { 
   }
 
   ngOnInit(): void {
@@ -76,9 +78,16 @@ export class AddContactComponent implements OnInit {
       contact.uid === user[0].uid ? isFound = true : ''
     });
 
-    // Set is added to true is user is already a contact and false otherwise
+    // Set is added to true is user is already a contact and false otherwise5r
     isFound ? user[0].isAdded = true : user[0].isAdded = false
-
   }
+
+    
+  openDialog(contact): void {
+    this.dialog.open(ViewContactComponent, {
+       width: '300px',
+       data: contact
+     });
+   }
 
 }

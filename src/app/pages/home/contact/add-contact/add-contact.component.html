@@ -27,7 +27,7 @@
                     {{user.username}}
                 </div>
                 <div class="view-contact ">
-                  <mat-icon >launch</mat-icon>
+                  <mat-icon  (click)="openDialog(user)">launch</mat-icon>
                   <mat-icon *ngIf="!user.isAdded" (click)="addToContact(user)">add</mat-icon>
                 </div>
             </div>
