@@ -6,6 +6,9 @@ import { Contact } from '../../../../shared/models/contact.model';
 import { Select } from '@ngxs/store';
 import { first } from 'rxjs/operators';
 import { ViewContactComponent } from '../view-contact/view-contact.component';
+import { setUserProfile } from 'src/app/shared/actions/user.actions';
+import { Store } from '@ngxs/store';
+
 @Component({
   selector: 'app-add-contact',
   templateUrl: './add-contact.component.html',
@@ -13,30 +16,20 @@ import { ViewContactComponent } from '../view-contact/view-contact.component';
 })
 export class AddContactComponent implements OnInit {
   @Select() userProfile$;
-  @Select() contact$;
   uid;
   user = {} as UserProfile;
+  userProfile = {} as UserProfile;
   users;
   contacts: Contact[];
   contact: Contact;
 
   submitBtnStatus : boolean = false;
 
-  constructor(public dialog: MatDialog, private contactService : ContactService) { 
+  constructor(public dialog: MatDialog, private contactService : ContactService, private store: Store) { 
   }
 
   ngOnInit(): void {
     this.getUserId();
-    this.getContacts();
-  }
-
-
-  getContacts(){
-    this.contact$.subscribe(
-      res => {
-        this.contacts = res.contact[0];
-      }
-    );
   }
 
   searchDirectory(form){
@@ -55,7 +48,9 @@ export class AddContactComponent implements OnInit {
 
   getUserId(){
     this.userProfile$.subscribe(res => {
+      this.userProfile = res.userProfile;
       this.uid = res.userProfile.uid 
+      this.contacts = [res.userProfile.contacts]
     })
   }
 
@@ -66,8 +61,14 @@ export class AddContactComponent implements OnInit {
       uid: user.uid,
       dateAdded: currDate
     }
+    // Push the new contact into the userProfile contact array
+    this.userProfile.contacts.push(this.contact)
     this.contactService.addToContact(this.contact, this.uid).then(
-      res=> console.log(res)
+      res=> {
+        console.log(res)
+        this.setUserProfile(this.userProfile)
+
+      }
     );
   }
 
@@ -89,5 +90,9 @@ export class AddContactComponent implements OnInit {
        data: contact
      });
    }
+     // Add user profile to the state
+  setUserProfile(userProfile: UserProfile){
+    this.store.dispatch(new setUserProfile(userProfile))
+  }
 
 }

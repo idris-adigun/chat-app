@@ -36,7 +36,8 @@ export class AuthService {
     userProfile.username = username;
     userProfile.status = false;
     userProfile.uid = uid;
-    userProfile.profileImageUrl = 'https://source.unsplash.com/random/200x200?sig=100';
+    userProfile.profileImageUrl = 'https://source.unsplash.com/random/200x200?sig=06';
+    userProfile.contacts = []
     this.userProfileCollection = this.afs.collection('UserProfile');
     return new Promise<any>((resolve, reject) => {
         this.userProfileCollection.doc(uid).set(userProfile).then(res =>{

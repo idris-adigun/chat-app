@@ -15,7 +15,6 @@ import { first } from 'rxjs/operators';
 })
 export class MyContactComponent implements OnInit {
   @Select() userProfile$;
-  @Select() contact$;
   uid: string = '';
   contacts: Contact[];
   contactDetails = []
@@ -26,21 +25,13 @@ export class MyContactComponent implements OnInit {
   ngOnInit(): void {
 
     this.getUserId();
-    this.getContacts()
     this.getContactDetails();
-  }
-
-  getContacts(){
-    this.contact$.subscribe(
-      res => {
-        this.contacts = res.contact[0];
-      }
-    );
   }
 
   getUserId(){
     this.userProfile$.subscribe(res => {
         this.uid = res.userProfile.uid
+        this.contacts = res.userProfile.contacts
     });
   }
 
@@ -66,6 +57,7 @@ export class MyContactComponent implements OnInit {
   getContactDetails()
   {
     this.contactDetails = [];
+    console.log(this.contacts)
     this.contacts.forEach((contact) => {
       this.authService.getUserProfile(contact.uid).pipe(first()).subscribe(res => {
         this.contactDetails.push(res[0])

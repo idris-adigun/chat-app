@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { UserProfile } from '../../shared/models/user.model';
 import { Contact } from '../../shared/models/contact.model';
 import { map } from 'rxjs/operators';
-
+import * as firebase from 'firebase/app';
 @Injectable({
   providedIn: 'root'
 })
@@ -13,7 +13,7 @@ export class ContactService {
   userProfileCollection: AngularFirestoreCollection<UserProfile>
   userProfile: Observable<UserProfile[]>;
   contactCollection: AngularFirestoreCollection<Contact>
-  contacts: Observable<Contact[]>;
+  // contacts: Observable<Contact[]>;
   constructor(public auth: AngularFireAuth, private afs: AngularFirestore) { }
 
   // get contact by username
@@ -33,14 +33,11 @@ export class ContactService {
   addToContact(contact, uid){
     this.userProfileCollection = this.afs.collection<UserProfile>('UserProfile');
     return new Promise<any>((resolve, reject) => {
-      this.userProfileCollection.doc(uid).collection('Contact').doc(contact.uid).set(contact).then(
-        res => {
-          resolve(res)
-        },
-        error => {
-          reject(error)
-        }
-      )
+      // const addContact = firebase.default.firestore.FieldValue.arrayUnion([contact])as unknown as Contact[];
+      this.userProfileCollection.doc(uid).update({'contacts': firebase.default.firestore.FieldValue.arrayUnion(contact)as unknown as Contact[] })
+      .then(res => {
+        resolve(res)
+      }).catch(e => reject(e));
 
     })
   }

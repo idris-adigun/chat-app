@@ -11,4 +11,5 @@ export interface UserProfile{
     status: boolean;
     uid: string;
     profileImageUrl: string;
+    contacts: Contact[];
 }

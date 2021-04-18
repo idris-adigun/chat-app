@@ -25,8 +25,7 @@ import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
 import { NgxsStoragePluginModule } from '@ngxs/storage-plugin';
 // State
-import { UserProfileState } from './shared/state/user.state'
-import { ContactState } from './shared/state/contact.state'
+import { UserProfileState } from './shared/state/user.state';
 
 @NgModule({
   declarations: [
@@ -45,7 +44,7 @@ import { ContactState } from './shared/state/contact.state'
     AngularFirestoreModule,
     AngularFireAuthModule,
     MatModule,
-    NgxsModule.forRoot([UserProfileState,ContactState]),
+    NgxsModule.forRoot([UserProfileState]),
     NgxsStoragePluginModule.forRoot(),
     NgxsReduxDevtoolsPluginModule.forRoot(),
     NgxsLoggerPluginModule.forRoot()

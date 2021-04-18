@@ -8,7 +8,6 @@ import{ Contact } from '../../shared/models/contact.model';
 import { Router } from '@angular/router';
 import { Store } from '@ngxs/store';
 import { setUserProfile } from '../../shared/actions/user.actions';
-import { setContact } from '../../shared/actions/contact.action'
 import { first } from 'rxjs/operators';
 
 @Component({
@@ -26,7 +25,7 @@ export class HomeComponent implements OnInit {
   contact = {} as Contact;
   contacts: Contact[];
 
-  constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, private auth: AuthService, private  contactService : ContactService, private route: Router, private store: Store) {
+  constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, private auth: AuthService, private route: Router, private store: Store) {
     //Modify sidebar type on the screen size
     this.mobileQuery = media.matchMedia('(max-width: 900px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
@@ -54,33 +53,17 @@ export class HomeComponent implements OnInit {
   //get user profile with uid
   getUserProfile(){
     this.auth.getUserProfile(this.uid).pipe(first()).subscribe(res =>{
+      console.log(res)
        this.userProfile = res[0];
        if(this.userProfile){
-          this.setUserProfile(this.userProfile)
-          this.getUserContact(this.userProfile.uid).then(res => {
-            this.addContact(res)
-          })
+          this.setUserProfile(this.userProfile);
        }
     })
-  }
-
-  // Get all the contact info base on user ID
-  getUserContact(uid){
-    return new Promise<any>((resolve, reject) => {
-      this.contactService.getMyContact(uid).pipe(first()).subscribe((res) =>{
-        res ? resolve(res) : reject('no contact')
-      })
-    })
-    
   }
 
   // Add user profile to the state
   setUserProfile(userProfile: UserProfile){
     this.store.dispatch(new setUserProfile(userProfile))
-  }
-  // Add user contact to the state
-  addContact(contact: Contact){
-    this.store.dispatch(new setContact(contact))
   }
 
 }

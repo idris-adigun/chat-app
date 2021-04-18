@@ -1,6 +1,7 @@
 import { State, Action, StateContext, Selector } from '@ngxs/store';
 import { UserProfile } from '../models/user.model';
-import { setUserProfile, RemoveUserProfile } from '../actions/user.actions';
+import { setUserProfile, RemoveUserProfile} from '../actions/user.actions';
+import { Contact } from '../models/contact.model';
 
 export class UserProfileStateModel {
     userProfile : UserProfile
@@ -14,7 +15,8 @@ export class UserProfileStateModel {
             username: '',
             status: false,
             uid: '',
-            profileImageUrl: ''
+            profileImageUrl: '',
+            contacts: []
         }
     }
 })
@@ -30,6 +32,7 @@ export class UserProfileState{
     setUserProfile({setState}: StateContext<UserProfileStateModel>, { payload } : setUserProfile){
             setState({userProfile: payload})
     }
+
 
     @Action(RemoveUserProfile)
     remove({getState, patchState}: StateContext<UserProfileStateModel>, { payload } : RemoveUserProfile){
