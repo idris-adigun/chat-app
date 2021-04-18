@@ -1,7 +1,7 @@
 import { Contact } from '../models/contact.model';
 
-export class addContact {
-    static readonly type = '[CONTACT] Add'
+export class setContact {
+    static readonly type = '[CONTACT] Set'
     constructor(public payload: Contact){
     }
 }

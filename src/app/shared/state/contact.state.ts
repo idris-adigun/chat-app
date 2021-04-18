@@ -1,6 +1,6 @@
 import { State, Action, StateContext, Selector } from '@ngxs/store';
 import { Contact } from '../models/contact.model';
-import { addContact, removeContact } from '../actions/contact.action';
+import { setContact, removeContact } from '../actions/contact.action';
 
 
 export class ContactStateModel {
@@ -20,12 +20,9 @@ export class ContactState{
         return state.contact;
     }
 
-    @Action(addContact)
-    add({getState, patchState}: StateContext<ContactStateModel>, { payload } : addContact){
-           const state = getState();
-           patchState({
-            contact: [...state.contact, payload]
-           })
+    @Action(setContact)
+    set({setState}: StateContext<ContactStateModel>, { payload } : setContact){
+        setState({contact: [payload]})
     }
 
     @Action(removeContact)

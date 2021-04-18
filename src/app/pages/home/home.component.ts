@@ -8,7 +8,8 @@ import{ Contact } from '../../shared/models/contact.model';
 import { Router } from '@angular/router';
 import { Store } from '@ngxs/store';
 import { setUserProfile } from '../../shared/actions/user.actions';
-import { addContact } from '../../shared/actions/contact.action'
+import { setContact } from '../../shared/actions/contact.action'
+import { first } from 'rxjs/operators';
 
 @Component({
   selector: 'app-home',
@@ -52,7 +53,7 @@ export class HomeComponent implements OnInit {
 
   //get user profile with uid
   getUserProfile(){
-    this.auth.getUserProfile(this.uid).subscribe(res =>{
+    this.auth.getUserProfile(this.uid).pipe(first()).subscribe(res =>{
        this.userProfile = res[0];
        if(this.userProfile){
           this.setUserProfile(this.userProfile)
@@ -66,7 +67,7 @@ export class HomeComponent implements OnInit {
   // Get all the contact info base on user ID
   getUserContact(uid){
     return new Promise<any>((resolve, reject) => {
-      this.contactService.getMyContact(uid).subscribe((res) =>{
+      this.contactService.getMyContact(uid).pipe(first()).subscribe((res) =>{
         res ? resolve(res) : reject('no contact')
       })
     })
@@ -79,7 +80,7 @@ export class HomeComponent implements OnInit {
   }
   // Add user contact to the state
   addContact(contact: Contact){
-    this.store.dispatch(new addContact(contact))
+    this.store.dispatch(new setContact(contact))
   }
 
 }

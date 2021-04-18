@@ -7,8 +7,7 @@ import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog
   styleUrls: ['./view-contact.component.scss']
 })
 export class ViewContactComponent implements OnInit {
-  constructor(
-    public dialogRef: MatDialogRef<ViewContactComponent>,
+  constructor(public dialogRef: MatDialogRef<ViewContactComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) {}
     
     contact: any;

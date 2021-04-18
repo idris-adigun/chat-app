@@ -6,6 +6,7 @@ import { ContactService } from './../../../../services/contact/contact.service';
 import { AuthService } from './../../../../services/auth/auth.service';
 import { Select } from '@ngxs/store';
 import { SendMessageComponent } from '../../components/send-message/send-message.component';
+import { first } from 'rxjs/operators';
 
 @Component({
   selector: 'app-my-contact',
@@ -23,26 +24,24 @@ export class MyContactComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    this.getUserContact();
+
+    this.getUserId();
+    this.getContacts()
+    this.getContactDetails();
   }
 
-  getUserContact(){
+  getContacts(){
     this.contact$.subscribe(
       res => {
-        this.contacts = res.contact[0]
-        this.contacts.forEach(contact => this.getContactDetails(contact.uid))
+        this.contacts = res.contact[0];
       }
-    )
+    );
   }
 
   getUserId(){
-    return new Promise<any>((resolve, reject) => {
-        this.userProfile$.subscribe(res => {
-          res.userProfile.uid ?
-            resolve(res.userProfile.uid)
-            : reject(null)
-        })
-    })
+    this.userProfile$.subscribe(res => {
+        this.uid = res.userProfile.uid
+    });
   }
 
   
@@ -52,25 +51,25 @@ export class MyContactComponent implements OnInit {
       data: contact
     });
   }
-  openMessageDialog(contact): void {
-    this.getUserId().then(senderId => {
-      this.dialog.open(SendMessageComponent, {
-         width: '500px',
-         data: {
-           recipientId: contact.uid,
-           senderId: senderId
-         }
-       });
 
-    })
+  openMessageDialog(contact): void {
+    this.dialog.open(SendMessageComponent, {
+        width: '500px',
+        data: {
+          recipientId: contact.uid,
+          senderId: this.uid
+        }
+      });
   }
 
 
-  getContactDetails(contactID){
-    this.authService.getUserProfile(contactID).subscribe(res =>
-    {
-      console.log(res);
-      this.contactDetails.push(res[0])
+  getContactDetails()
+  {
+    this.contactDetails = [];
+    this.contacts.forEach((contact) => {
+      this.authService.getUserProfile(contact.uid).pipe(first()).subscribe(res => {
+        this.contactDetails.push(res[0])
+      })
     })
   }
 

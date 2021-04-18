@@ -23,7 +23,7 @@ import { MatModule } from './module/mat/mat.module';
 import { NgxsModule } from '@ngxs/store';
 import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
-
+import { NgxsStoragePluginModule } from '@ngxs/storage-plugin';
 // State
 import { UserProfileState } from './shared/state/user.state'
 import { ContactState } from './shared/state/contact.state'
@@ -46,6 +46,7 @@ import { ContactState } from './shared/state/contact.state'
     AngularFireAuthModule,
     MatModule,
     NgxsModule.forRoot([UserProfileState,ContactState]),
+    NgxsStoragePluginModule.forRoot(),
     NgxsReduxDevtoolsPluginModule.forRoot(),
     NgxsLoggerPluginModule.forRoot()
   ],
