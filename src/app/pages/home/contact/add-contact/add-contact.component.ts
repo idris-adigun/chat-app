@@ -69,8 +69,7 @@ export class AddContactComponent implements OnInit {
     this.contactService.addToContact(this.contact, this.uid).then(
       res=> {
         console.log(res)
-        this.setUserProfile(this.userProfile)
-
+        this.setUserProfile(this.userProfile);
       }
     );
   }
@@ -79,10 +78,10 @@ export class AddContactComponent implements OnInit {
   isUserAdded(user){
     let isFound = false;
     this.contacts.forEach( (contact) => {
-      contact.uid === user[0].uid ? isFound = true : ''
+      contact[0].uid === user[0].uid ? isFound = true : ''
     });
-
-    // Set is added to true is user is already a contact and false otherwise5r
+    
+    // Set is added to true is user is already a contact and false otherwise
     isFound ? user[0].isAdded = true : user[0].isAdded = false
   }
 
