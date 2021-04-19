@@ -6,13 +6,14 @@
         <form class="message-form" #messageForm="ngForm">
           <div class="form-group">
             <mat-form-field class="field message-field">
-              <input matInput type="text" [ngClass] = "{'is-invalid': message.errors?.required && message.touched}"
-              [(ngModel)] = "content.message" name="message" #message = "ngModel" placeholder="message" autofocus=""  inputmode="text"  required  >
+              <mat-label>Message</mat-label>
+              <textarea  matInput type="text" [ngClass] = "{'is-invalid': message.errors?.required && message.touched}"
+              [(ngModel)] = "content.message" name="message" #message = "ngModel"  autofocus="" placeholder="..."  inputmode="text"  required  ></textarea>
             </mat-form-field>
           </div>
         </form>
         <div>
-            <button [disabled]="submitBtnStatus" mat-raised-button class="search-btn" (click)="sendMessage(messageForm)">Send</button>
+            <button [disabled]="submitBtnStatus" mat-raised-button class="search-btn" (click)="sendMessage(messageForm)"><mat-icon>send</mat-icon></button>
         </div>
     </div>
   </div>

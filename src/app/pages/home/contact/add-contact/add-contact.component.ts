@@ -77,10 +77,9 @@ export class AddContactComponent implements OnInit {
   // Check if contact has already been added
   isUserAdded(user){
     let isFound = false;
-    this.contacts.forEach( (contact) => {
+    this.contacts.forEach((contact) => {
       contact[0].uid === user[0].uid ? isFound = true : ''
     });
-    
     // Set is added to true is user is already a contact and false otherwise
     isFound ? user[0].isAdded = true : user[0].isAdded = false
   }

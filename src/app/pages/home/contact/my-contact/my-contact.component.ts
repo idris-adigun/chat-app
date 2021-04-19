@@ -43,7 +43,7 @@ export class MyContactComponent implements OnInit {
     });
   }
 
-  messageContact(contact): void {
+  startConversation(contact): void {
     this.dialog.open(SendMessageComponent, {
         width: '500px',
         data: {
