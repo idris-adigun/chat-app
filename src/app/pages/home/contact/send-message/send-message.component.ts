@@ -37,7 +37,7 @@ export class SendMessageComponent implements OnInit {
         lastUpdated: new Date()
       }
       this.conversationService.startConversation(conversation).then(res => {
-        console.log(res)
+        res ? this.dialogRef.close() : '';
       }).catch(e => console.log(e))
     }
   }
