@@ -36,14 +36,14 @@ export class MyContactComponent implements OnInit {
   }
 
   
-  openDialog(contact): void {
+  viewContact(contact): void {
    this.dialog.open(ViewContactComponent, {
       width: '300px',
       data: contact
     });
   }
 
-  openMessageDialog(contact): void {
+  messageContact(contact): void {
     this.dialog.open(SendMessageComponent, {
         width: '500px',
         data: {

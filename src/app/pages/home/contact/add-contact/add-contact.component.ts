@@ -32,6 +32,8 @@ export class AddContactComponent implements OnInit {
     this.getUserId();
   }
 
+
+  // Search user profile directory
   searchDirectory(form){
     if(form.valid){
       this.submitBtnStatus = true;
@@ -46,6 +48,7 @@ export class AddContactComponent implements OnInit {
     }
   }
 
+  // get user Id from NGXS state
   getUserId(){
     this.userProfile$.subscribe(res => {
       this.userProfile = res.userProfile;
@@ -83,13 +86,14 @@ export class AddContactComponent implements OnInit {
     isFound ? user[0].isAdded = true : user[0].isAdded = false
   }
 
-    
-  openDialog(contact): void {
+  // 
+  viewContact(contact): void {
     this.dialog.open(ViewContactComponent, {
        width: '300px',
        data: contact
      });
    }
+
      // Add user profile to the state
   setUserProfile(userProfile: UserProfile){
     this.store.dispatch(new setUserProfile(userProfile))
