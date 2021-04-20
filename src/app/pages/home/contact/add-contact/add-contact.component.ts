@@ -20,7 +20,7 @@ export class AddContactComponent implements OnInit {
   user = {} as UserProfile;
   userProfile = {} as UserProfile;
   users;
-  contacts: Contact[];
+  contacts;
   contact: Contact;
 
   submitBtnStatus : boolean = false;
@@ -39,10 +39,16 @@ export class AddContactComponent implements OnInit {
       this.submitBtnStatus = true;
       this.contactService.searchDirectory(form.value.username, this.uid).pipe(first()).subscribe(
         res => {
-          this.users = res;
           console.log(res)
-          this.isUserAdded(res)
-          this.submitBtnStatus = false;
+          if(res.length > 0){
+            this.users = res;
+            this.isUserAdded(this.user);
+            this.submitBtnStatus = false;
+          }
+          else{
+            console.log('No user found!')
+            this.submitBtnStatus = false;
+          }
         }
       );
     }
@@ -77,8 +83,8 @@ export class AddContactComponent implements OnInit {
   // Check if contact has already been added
   isUserAdded(user){
     let isFound = false;
-    this.contacts.forEach((contact) => {
-      contact[0].uid === user[0].uid ? isFound = true : ''
+    this.contacts[0].forEach((contact) => {
+      contact.uid === user[0].uid ? isFound = true : ''
     });
     // Set is added to true is user is already a contact and false otherwise
     isFound ? user[0].isAdded = true : user[0].isAdded = false
