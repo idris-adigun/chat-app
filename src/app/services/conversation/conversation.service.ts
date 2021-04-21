@@ -51,4 +51,19 @@ export class ConversationService {
     })
   }
 
+  // Get Conversation the user is a member of
+  getConversation(userID){
+    this.conversationCollection = this.afs.collection<Conversation>('Conversation', ref => {
+      return ref.where('member', 'array-contains-any', [userID]);
+    });    
+    return this.conversationCollection.snapshotChanges().pipe(
+      map(actions => actions.map(res => {
+        const data = res.payload.doc.data() as Conversation;
+        console.log(data);
+        return data
+      }))
+    )
+
+  }
+
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Select } from '@ngxs/store';
+import { ConversationService } from 'src/app/services/conversation/conversation.service';
 
 @Component({
   selector: 'app-inbox',
@@ -9,49 +10,26 @@ import { Select } from '@ngxs/store';
 export class InboxComponent implements OnInit {
   // Get userProfile State
   @Select() userProfile$;
+  uid: string = '';
   userDetails
 
-  conversations = [
-    {
-      name: 'Kelly',
-      profile_url: 'https://source.unsplash.com/random/200x200?sig=1',
-      last_message: 'How are you doing?',
-      messages: [
-        {
-          message: 'Hey',
-          date_sent: new Date()
-        }
-      ],
-      date_sent: new Date()
-    },
-    {
-      name: 'John',
-      profile_url: 'https://source.unsplash.com/random/200x200?sig=2',
-      last_message: 'How are you doing?',
-      date_sent: new Date()
-    },
-    {
-      name: 'mary',
-      profile_url: 'https://source.unsplash.com/random/200x200?sig=3',
-      last_message: 'Heyy',
-      date_sent: new Date()
-    },
-    {
-      name: 'John',
-      profile_url: 'https://source.unsplash.com/random/200x200?sig=4',
-      last_message: 'Heyy',
-      date_sent: new Date()
-    },
-    {
-      name: 'Grey',
-      profile_url: 'https://source.unsplash.com/random/200x200?sig=5',
-      last_message: 'Thanks',
-      date_sent: new Date()
-    }
-  ]
-  constructor() { 
+  conversations = [];
+  constructor(private conversationService: ConversationService) { 
+    this.getUserId();
+    this.getConversation();
   }
 
+  getUserId(){
+    this.userProfile$.subscribe(res => {
+        this.uid = res.userProfile.uid;
+    });
+  }
+
+  getConversation(){
+    this.conversationService.getConversation(this.uid).subscribe(res =>{
+      this.conversations = res;
+    })
+  }
   ngOnInit(): void {
     this.userProfile$.subscribe(res => this.userDetails = res)
   }

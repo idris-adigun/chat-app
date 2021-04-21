@@ -78,8 +78,6 @@ export class SendMessageComponent implements OnInit {
   updateConversation(conversationId, lastMessage, lastUpdated){
     console.log('Conversation already exist, updating conversation')
     this.conversationService.updateConversation(conversationId, lastMessage, lastUpdated)
-    
-
   }
 
   
