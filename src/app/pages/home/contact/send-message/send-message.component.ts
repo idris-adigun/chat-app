@@ -65,8 +65,9 @@ export class SendMessageComponent implements OnInit {
       // Check If conversation exist before creating a new one and adding message
       this.conversationService.checkConversation(conversation.uid).pipe(first()).subscribe(res =>{
         let data = res;
-          data.length > 0 ? console.log('Conversation already exist, updating conversation') : 
-          this.startNewConversation(conversation);
+          data.length > 0 ? 
+          this.updateConversation(conversation.uid, form.value.message, message.date_sent) 
+          : this.startNewConversation(conversation);
       }, (error) => {
         console.log(error)
       })
@@ -74,14 +75,17 @@ export class SendMessageComponent implements OnInit {
     }
   }
 
-  updateConversation(){
+  updateConversation(conversationId, lastMessage, lastUpdated){
+    console.log('Conversation already exist, updating conversation')
+    this.conversationService.updateConversation(conversationId, lastMessage, lastUpdated)
+    
 
   }
 
   
   startNewConversation(conversation){
     this.conversationService.startConversation(conversation).then(res => {
-      res ? console.log('Starting new conversation') : '';
+      res ? console.log('Starting a new conversation') : '';
     }).catch(e => console.log(e));
 
   }

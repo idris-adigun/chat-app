@@ -15,7 +15,6 @@ export class ConversationService {
 
   // check if conversation exist 
   checkConversation(conversationId){
-    console.log('Checking conversation')
       this.conversationCollection = this.afs.collection<Conversation>('Conversation', ref => {
         return ref.where('uid', '==', conversationId);
       });    
@@ -28,9 +27,18 @@ export class ConversationService {
       )
   }
 
-  // Update Conversation with the latest message
-  updateConversation(conversationId, date, lastMessage){
-    
+  // Update Conversation with the latest message and last updated
+  updateConversation(conversationId, lastMessage, lastUpdated){
+    this.conversationCollection = this.afs.collection<Conversation>('Conversation', ref => {
+      return ref.where('uid', '==', conversationId);
+    });    
+    this.conversationCollection.snapshotChanges().subscribe((res: any) => {
+      let id = res[0].payload.doc.id;
+      return this.afs.collection('Conversation').doc(id).update({
+        lastUpdated: lastUpdated,
+        lastMessage: lastMessage
+      });
+    });
   }
 
   // Create Conversation by adding sender and recipient Id to member array
@@ -42,5 +50,5 @@ export class ConversationService {
       ).catch(e => reject(e))
     })
   }
-  
+
 }
