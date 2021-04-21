@@ -1,10 +1,8 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
-import { Observable } from 'rxjs';
 import { Conversation } from '../../shared/models/conversation.model';
 import { map } from 'rxjs/operators';
-import * as firebase from 'firebase/app';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +11,27 @@ export class ConversationService {
   conversationCollection: AngularFirestoreCollection<Conversation>
 
   constructor(public auth: AngularFireAuth, private afs: AngularFirestore) { }
+
+
+  // check if conversation exist 
+  checkConversation(conversationId){
+    console.log('Checking conversation')
+      this.conversationCollection = this.afs.collection<Conversation>('Conversation', ref => {
+        return ref.where('uid', '==', conversationId);
+      });    
+      return this.conversationCollection.snapshotChanges().pipe(
+        map(actions => actions.map(res => {
+          const data = res.payload.doc.data() as Conversation;
+          console.log(data);
+          return data
+        }))
+      )
+  }
+
+  // Update Conversation with the latest message
+  updateConversation(conversationId, date, lastMessage){
+    
+  }
 
   // Create Conversation by adding sender and recipient Id to member array
   startConversation(conversation){
@@ -23,8 +42,5 @@ export class ConversationService {
       ).catch(e => reject(e))
     })
   }
-
-  //update conversation last message and dateUpdate
-
-  // Add message to conversation by checking if sender and recipient are part of the member array of the conversation
+  
 }

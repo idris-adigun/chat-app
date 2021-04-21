@@ -1,6 +1,6 @@
 export interface Conversation{
-    member: string[];
-    message: string;
+    uid: string
     lastUpdated: Date;
     lastMessage: string;
+    member: string[];
 }

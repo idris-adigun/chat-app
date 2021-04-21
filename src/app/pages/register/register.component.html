@@ -19,7 +19,7 @@
         <div class="form-group">
             <mat-form-field class="field email-field">
               <input matInput placeholder="Email: " [ngClass] = "{'is-invalid': email.errors?.required && email.touched}"
-              [(ngModel)] = "user.email" name="email" #email = "ngModel"    pattern="^[^\s@]+@[^\s@]+\.[^\s@]{2,}$" placeholder="Email" autofocus="" type="text"   required >
+              [(ngModel)] = "user.email" name="email" #email = "ngModel" pattern="^[^\s@]+@[^\s@]+\.[^\s@]{2,}$" placeholder="Email" autofocus="" type="text"   required >
             </mat-form-field>
             <div *ngIf="email.invalid &&  (email.dirty || email.touched)" class="alert-danger">
                 <div *ngIf="email.errors.pattern">
