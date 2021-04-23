@@ -35,6 +35,9 @@ export class MyContactComponent implements OnInit {
     });
   }
 
+  // TODO: remove current user id from contact members
+
+  // TODO: get members contact details from the id 
   
   viewContact(contact): void {
    this.dialog.open(ViewContactComponent, {
