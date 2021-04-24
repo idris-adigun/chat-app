@@ -59,7 +59,6 @@ export class ConversationService {
     return this.conversationCollection.snapshotChanges().pipe(
       map(actions => actions.map(res => {
         const data = res.payload.doc.data() as Conversation;
-        console.log(data);
         return data
       }))
     )

@@ -24,6 +24,9 @@ export class HomeComponent implements OnInit {
   userProfile = {} as UserProfile;
   contact = {} as Contact;
   contacts: Contact[];
+  userProfileSub;
+  userStatusSub;
+
 
   constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, private auth: AuthService, private route: Router, private store: Store) {
     //Modify sidebar type on the screen size
@@ -32,17 +35,20 @@ export class HomeComponent implements OnInit {
     this.mobileQuery.addEventListener('change', this._mobileQueryListener);
   }
 
-  ngOnDestroy(): void {
-    this.mobileQuery.removeEventListener('change', this._mobileQueryListener);
-  }
-
   ngOnInit(): void {
     this.checkLoginStatus();
   }
 
+  ngOnDestroy(): void {
+    this.mobileQuery.removeEventListener('change', this._mobileQueryListener);
+    // Unsubscribe from services
+    this.userStatusSub.unsubscribe()
+    this.userProfileSub.unsubscribe()
+  }
+
   //check if user is logged in
  checkLoginStatus(){
-    this.auth.checkLogin().then((res: UserProfile)  =>{
+    this.userStatusSub = this.auth.checkLogin().then((res: UserProfile)  =>{
       this.uid = res.uid;
       this.getUserProfile();
     }).catch(message => {
@@ -52,7 +58,7 @@ export class HomeComponent implements OnInit {
 
   //get user profile with uid
   getUserProfile(){
-    this.auth.getUserProfile(this.uid).pipe(first()).subscribe(res =>{
+    this.userProfileSub =  this.auth.getUserProfile(this.uid).pipe(first()).subscribe(res =>{
       console.log(res)
        this.userProfile = res[0];
        if(this.userProfile){

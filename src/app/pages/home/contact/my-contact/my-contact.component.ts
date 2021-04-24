@@ -17,7 +17,8 @@ export class MyContactComponent implements OnInit {
   @Select() userProfile$;
   uid: string = '';
   contacts: Contact[];
-  contactDetails = []
+  contactDetails = [];
+  contactSubService;
 
   constructor(public dialog: MatDialog, private contactService : ContactService, private authService: AuthService) {
    }
@@ -27,6 +28,11 @@ export class MyContactComponent implements OnInit {
     this.getUserId();
     this.getContactDetails();
   }
+  ngOnDestroy(): void {
+    //Called once, before the instance is destroyed.
+    //Add 'implements OnDestroy' to the class.
+    this.contactSubService.unsubscribe();
+  }
 
   getUserId(){
     this.userProfile$.subscribe(res => {
@@ -34,10 +40,6 @@ export class MyContactComponent implements OnInit {
         this.contacts = res.userProfile.contacts
     });
   }
-
-  // TODO: remove current user id from contact members
-
-  // TODO: get members contact details from the id 
   
   viewContact(contact): void {
    this.dialog.open(ViewContactComponent, {
@@ -62,7 +64,7 @@ export class MyContactComponent implements OnInit {
     this.contactDetails = [];
     console.log(this.contacts)
     this.contacts.forEach((contact) => {
-      this.authService.getUserProfile(contact.uid).pipe(first()).subscribe(res => {
+      this.contactSubService = this.authService.getUserProfile(contact.uid).pipe(first()).subscribe(res => {
         this.contactDetails.push(res[0])
       })
     })

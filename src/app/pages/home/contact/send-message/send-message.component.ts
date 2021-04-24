@@ -19,6 +19,7 @@ export class SendMessageComponent implements OnInit {
 
   conversationId: string;
   conversation = {} as Conversation;
+  conversationServiceSub; //use to manage subscription to conversation services
 
 
   constructor(public dialogRef: MatDialogRef<SendMessageComponent>,
@@ -27,6 +28,13 @@ export class SendMessageComponent implements OnInit {
     ngOnInit(): void {    
       this.senderId = this.data.senderId;
       this.recipientId = this.data.recipientId;
+    }
+
+    ngOnDestroy(): void {
+      //Called once, before the instance is destroyed.
+      //Add 'implements OnDestroy' to the class.
+      this.conversationServiceSub.unsubscribed(); //Unsubscribed from conversation service when component is destroyed
+      
     }
 
     // Create a unique conversation Id using the sender and recipient's id
@@ -63,7 +71,7 @@ export class SendMessageComponent implements OnInit {
       let message = this.formatMessage(form.value.message, conversation.uid);
 
       // Check If conversation exist before creating a new one and adding message
-      this.conversationService.checkConversation(conversation.uid).pipe(first()).subscribe(res =>{
+     this.conversationServiceSub =  this.conversationService.checkConversation(conversation.uid).pipe(first()).subscribe(res =>{
         let data = res;
           data.length > 0 ? 
           this.updateConversation(conversation.uid, form.value.message, message.date_sent) 
@@ -94,8 +102,6 @@ export class SendMessageComponent implements OnInit {
     }, (error) => {
       console.log(error)
     })
-
-
   }
 
 
