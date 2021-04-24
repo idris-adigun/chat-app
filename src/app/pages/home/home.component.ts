@@ -59,7 +59,6 @@ export class HomeComponent implements OnInit {
   //get user profile with uid
   getUserProfile(){
     this.userProfileSub =  this.auth.getUserProfile(this.uid).pipe(first()).subscribe(res =>{
-      console.log(res)
        this.userProfile = res[0];
        if(this.userProfile){
           this.setUserProfile(this.userProfile);

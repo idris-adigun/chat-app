@@ -1,16 +1,25 @@
 <div class="container">
     <div class="conversations">
-        <div *ngFor="let conversation of conversations">
+        <div *ngFor="let conversation of conversationWithContDetails">
             <div class="conversation-list" [routerLink]="['messages']" [state]="conversation">
-                <div class="profile">
-                    <img src="{{conversation.profile_url}}" class="profile-image">
+                <div *ngFor="let member of conversation.member">
+                    <div class="profile">
+                        <img src="{{member.profileImageUrl}}" class="profile-image">
+                    </div>
                 </div>
                 <div class="summary">
-                    <div class="name">
-                        {{conversation.member}}
+                    <div class="member-details">
+                        <div *ngFor="let member of conversation.member">
+                            <div class="name">
+                                {{member.username}}
+                            </div>
+                        </div>
+                        <div class="last_message">
+                            {{conversation.lastMessage}}
+                        </div>
                     </div>
-                    <div class="last_message">
-                        {{conversation.lastMessage}}
+                    <div class="conversation-date">
+                        {{conversation.lastUpdated.toDate() | date:'shortDate' }}
                     </div>
                 </div>
             </div>

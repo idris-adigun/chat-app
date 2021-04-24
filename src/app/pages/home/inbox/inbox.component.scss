@@ -26,6 +26,10 @@
     .summary {
       padding-left: 10px;
       color: $primary;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      width: 100%;
 
       .name {
         font-weight: bold;

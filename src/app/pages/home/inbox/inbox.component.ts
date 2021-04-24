@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Select } from '@ngxs/store';
 import { first } from 'rxjs/operators';
+import { AuthService } from 'src/app/services/auth/auth.service';
 import { ConversationService } from 'src/app/services/conversation/conversation.service';
 import { Conversation } from 'src/app/shared/models/conversation.model';
 
@@ -15,28 +16,29 @@ export class InboxComponent implements OnInit {
   uid: string = '';
   userDetails;
   conversationSub;
-
+  userProfileSub;
   conversations : Conversation [];
   filteredconversations : Conversation [];
-  constructor(private conversationService: ConversationService) { 
+  conversationWithContDetails = [];
+  constructor(private conversationService: ConversationService, private auth: AuthService) { 
     this.getUserId();
     this.getConversation();
   }
   ngOnInit(): void {
-    this.userProfile$.subscribe(res => this.userDetails = res)
+    this.userProfile$.subscribe(res => this.userDetails = res);
   }
 
   ngOnDestroy(){
     // Subscribe from conversation when component is destryoed
-    this.conversationSub.unsubscribe()
-    console.log('unsubscribed from conversation')
+    this.conversationSub.unsubscribe();
+    this.userProfileSub.unsubscribe();
+    console.log('unsubscribed from conversation');
   }
 
   // get user id from state
   getUserId(){
     this.userProfile$.subscribe(res => {
         this.uid = res.userProfile.uid;
-        console.log(this.uid)
     });
   }
   // get all users conversation user is a memeber of
@@ -44,32 +46,49 @@ export class InboxComponent implements OnInit {
     this.conversationSub = this.conversationService.getConversation(this.uid).pipe(first()).subscribe(res =>{
       if(res.length > 0){
         this.conversations = res;
-        this.filterOutCurrentUser()
+        this.filterOutCurrentUser();
+        this.getConversationMemberDetails();
       }
       else{
-        console.log('No conversation found!')
+        console.log('No conversation found!');
       }
     },
     error => {
-      console.log('Unable to retrieved Conversation')
+      console.log('Unable to retrieved Conversation');
     })
   }
 
 
+  //remove current user id from contact members
   filterOutCurrentUser(){
-    console.log(this.conversations)
      this.filteredconversations = this.conversations.map((conversation => {
-      return {...conversation, member: conversation.member.filter((id => id !== this.uid))}
+      return {...conversation, member: conversation.member.filter((uid => uid !== this.uid))}
      }));
   }
 
-  //For each memebers in the conversation, get their profile details
+  //For each members in the filtered conversation, get their profile details
+  getConversationMemberDetails(){
+    this.conversationWithContDetails =this.filteredconversations.map((conversation) => {
+      return {...conversation, member : conversation.member.map(
+        (uid) => this.getUserDetails(uid)
+      )}
+    });
+  }
 
-
-
-
-
-
-  // TODO: remove current user id from contact members
-
+  getUserDetails(uid){
+    let contactDetails = {
+      username: '',
+      profileImageUrl: ''
+    }
+    this.userProfileSub = this.auth.getUserProfile(uid).pipe(first()).subscribe(
+      (res) => {
+        if(res.length > 0){
+          contactDetails.username = res[0].username;
+          contactDetails.profileImageUrl = res[0].profileImageUrl;
+        }
+      })
+      return contactDetails;
+  }
 }
+
+
