@@ -42,7 +42,7 @@ export class AddContactComponent implements OnInit {
           console.log(res)
           if(res.length > 0){
             this.users = res;
-            this.isUserAdded(this.user);
+            this.isUserAdded(this.users);
             this.submitBtnStatus = false;
           }
           else{
@@ -82,6 +82,7 @@ export class AddContactComponent implements OnInit {
 
   // Check if contact has already been added
   isUserAdded(user){
+    console.log(user)
     let isFound = false;
     this.contacts[0].forEach((contact) => {
       contact.uid === user[0].uid ? isFound = true : ''

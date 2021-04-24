@@ -1,7 +1,6 @@
 import { State, Action, StateContext, Selector } from '@ngxs/store';
 import { UserProfile } from '../models/user.model';
 import { setUserProfile, RemoveUserProfile} from '../actions/user.actions';
-import { Contact } from '../models/contact.model';
 
 export class UserProfileStateModel {
     userProfile : UserProfile
