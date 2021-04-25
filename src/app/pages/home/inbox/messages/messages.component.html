@@ -6,7 +6,7 @@
             </div>
             <div class="conversations">
                 <div *ngFor="let message of messages" class="px-4">
-                        <div class="message" [ngClass]="{'right' : message.sender === uid}">
+                        <div class="message" [ngClass]="{'right' : message.sender === uid, 'left' : message.sender !== uid}">
                             <div class="message-content">
                                 {{message.message}}
                             </div>
