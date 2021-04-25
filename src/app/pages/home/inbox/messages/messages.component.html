@@ -4,11 +4,12 @@
             <div class="header">
                 <button mat-button  [routerLink]="['/home/inbox/']"><mat-icon>arrow_back</mat-icon> Back</button>
             </div>
-            <div class="conversations">
+            <div class="conversations" scrollable (scrollPosition)="scrollHandler($event)">
                 <div *ngFor="let message of messages" class="px-4">
                         <div class="message" [ngClass]="{'right' : message.sender === uid, 'left' : message.sender !== uid}">
                             <div class="message-content">
-                                {{message.message}}
+                                {{message.message}} <br>
+                                <span>{{message.date_sent.toDate() | date:'short' }}</span>
                             </div>
                         </div>
                 </div>

@@ -22,11 +22,25 @@ export class MessageService {
     ref => ref.where('conversationId', '==', conversationId).orderBy('date_sent', 'asc'));
 
     return this.messageCollection.snapshotChanges().pipe(
-      map(actions => actions.map(res => {
+      map(messages => messages.map(res => {
+        let startAt  = res.payload.newIndex
+        // console.log(res.payload.newIndex)
         const data = res.payload.doc.data() as Message;
         return data
       }))
     )
   }
+
+  // getMoreMessages(conversationId, startAt){
+  //   this.messageCollection = this.afs.collection<Message>('Message', 
+  //   ref => ref.where('conversationId', '==', conversationId).orderBy('date_sent', 'desc').startAt(startAt).limit(5));
+
+  //   return this.messageCollection.snapshotChanges().pipe(
+  //     map(actions => actions.map(res => {
+  //       const data = res.payload.doc.data() as Message;
+  //       return data
+  //     }))
+  //   )
+  // }
 
 }
