@@ -1,7 +1,7 @@
-<div class="container">
-    <app-toolbar [drawer]="drawer"></app-toolbar>
-    <div class="content">
-      <mat-drawer-container class="container" autosize>
+<div class="home">
+    <app-toolbar [drawer]="drawer" class="toolbar"></app-toolbar>
+    <div class="container">
+      <mat-drawer-container class="content" autosize>
         <mat-drawer #drawer class="sidenav" opened="true" [mode]="mobileQuery.matches ? 'over' : 'side'">
           <app-sidebar [userProfile]="userProfile"></app-sidebar>
         </mat-drawer>
@@ -11,5 +11,4 @@
         </div>
       </mat-drawer-container>
     </div>
-  
   </div>

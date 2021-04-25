@@ -1,25 +1,30 @@
 @import "../../../theme.scss";
-.container {
-  width: 100%;
-  height: 95vh;
-  background-color: $background-color;
-  .content {
+.home {
+  margin: 0;
+  padding: 0;
+
+  .container {
     display: flex;
-    height: 100%;
     align-items: center;
     justify-content: center;
-  }
 
-  .sidenav {
-    padding: 20px;
-    background-color: $card-color;
-    border-radius: 5px;
-    margin: 10px 5px 0px 5px;
-    border: none;
-  }
-  .mat-toolbar {
-    border-radius: 5px;
-    background-color: $card-color;
-    color: $primary;
+    .content {
+      width: 100%;
+      height: 93vh;
+      background-color: $background-color;
+    }
+
+    .sidenav {
+      padding: 20px;
+      background-color: $card-color;
+      border-radius: 5px;
+      margin: 10px 5px 0px 5px;
+      border: none;
+    }
+    .mat-toolbar {
+      border-radius: 5px;
+      background-color: $card-color;
+      color: $primary;
+    }
   }
 }
