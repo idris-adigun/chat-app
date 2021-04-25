@@ -1,7 +1,7 @@
 <div class="container">
     <div class="conversations">
         <div *ngFor="let conversation of conversationWithContDetails">
-            <div class="conversation-list" [routerLink]="['messages']" [state]="conversation">
+            <div class="conversation-list" [routerLink]="['messages']" [queryParams]="{ id: conversation.uid }">
                 <div *ngFor="let member of conversation.member">
                     <div class="profile">
                         <img src="{{member.profileImageUrl}}" class="profile-image">

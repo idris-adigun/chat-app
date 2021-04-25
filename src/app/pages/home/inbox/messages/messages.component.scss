@@ -1,7 +1,44 @@
+@import "../../../../../theme.scss";
 .container {
   display: flex;
   flex-direction: column;
-  margin: 10px 15px;
-  height: 85vh;
-  //   width: 100%;
+  max-width: 800px;
+  padding: 0px 10px;
+  margin: 10px auto;
+  // height: 85vh;
+
+  .content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+
+    .conversations-section {
+      overflow-y: scroll;
+      max-height: 700px;
+
+      .header {
+        padding: 10px 0px;
+      }
+      .conversations {
+        padding: 0px 20px;
+        display: flex;
+        flex-direction: column;
+
+        .message {
+          background-color: $card-color;
+          padding: 10px 10px;
+          width: fit-content;
+          margin: 10px 0px;
+          border-radius: 3px;
+        }
+        .right {
+          float: right;
+        }
+      }
+    }
+    .message-form {
+      padding: 0px 20px;
+    }
+  }
 }

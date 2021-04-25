@@ -76,10 +76,7 @@ export class InboxComponent implements OnInit {
   }
 
   getUserDetails(uid){
-    let contactDetails = {
-      username: '',
-      profileImageUrl: ''
-    }
+    let contactDetails = { username: '', profileImageUrl: '' };
     this.userProfileSub = this.auth.getUserProfile(uid).pipe(first()).subscribe(
       (res) => {
         if(res.length > 0){
