@@ -30,9 +30,9 @@ export class InboxComponent implements OnInit {
 
   ngOnDestroy(){
     // Subscribe from conversation when component is destryoed
-    this.conversationSub.unsubscribe();
-    this.userProfileSub.unsubscribe();
-    console.log('unsubscribed from conversation');
+    // this.conversationSub.unsubscribe();
+    // this.userProfileSub.unsubscribe();
+    // console.log('unsubscribed from conversation');
   }
 
   // get user id from state

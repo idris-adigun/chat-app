@@ -21,11 +21,11 @@
         <li class="nav-list">
           <button mat-button class="nav-item"   [routerLink]="['contact']">Contact <mat-icon inline="true" class="material-icons-outlined">contact_page</mat-icon></button>
         </li>
-        <li class="nav-list">
+        <!-- <li class="nav-list">
           <button mat-button class="nav-item">Settings <mat-icon inline="true" class="material-icons-outlined">settings</mat-icon></button>
-        </li>
+        </li> -->
         <li class="nav-list">
-          <button mat-button class="nav-item">Log Out <mat-icon inline="true" class="material-icons-outlined">power</mat-icon></button>
+          <button mat-button class="nav-item" (click)="logout()">Log Out <mat-icon inline="true" class="material-icons-outlined">power</mat-icon></button>
         </li>
       </ul>
   </div>

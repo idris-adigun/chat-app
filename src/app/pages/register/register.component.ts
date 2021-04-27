@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../../shared/models/user.model'
 import { AuthService } from '../../services/auth/auth.service'
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -8,7 +9,7 @@ import { AuthService } from '../../services/auth/auth.service'
 })
 export class RegisterComponent implements OnInit {
   user = {} as User
-  constructor(private auth: AuthService) {
+  constructor(private auth: AuthService, private route: Router) {
 
   }
 
@@ -25,7 +26,8 @@ export class RegisterComponent implements OnInit {
           if(res.user){
             this.auth.createProfile(this.user, res.user.uid).then(
               res => {
-                console.log('Profile created')
+                console.log('Profile created');
+                this.route.navigate(['/']);
             })
             .catch(e => {
               console.log(e)

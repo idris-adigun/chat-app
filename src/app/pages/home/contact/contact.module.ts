@@ -9,6 +9,7 @@ import { ViewContactComponent } from './view-contact/view-contact.component';
 import { AddContactComponent } from './add-contact/add-contact.component';
 import { MyContactComponent } from './my-contact/my-contact.component';
 import { SendMessageComponent } from './send-message/send-message.component';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { SendMessageComponent } from './send-message/send-message.component';
     ContactRoutingModule,
     MatModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatSnackBarModule
   ]
 })
 export class ContactModule { }

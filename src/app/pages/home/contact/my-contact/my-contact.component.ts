@@ -19,12 +19,12 @@ export class MyContactComponent implements OnInit {
   contacts: Contact[];
   contactDetails = [];
   contactSubService;
+  defaultMessage = 'No contact added!';
 
   constructor(public dialog: MatDialog, private contactService : ContactService, private authService: AuthService) {
    }
 
   ngOnInit(): void {
-
     this.getUserId();
     this.getContactDetails();
   }
@@ -65,9 +65,13 @@ export class MyContactComponent implements OnInit {
     console.log(this.contacts)
     this.contacts.forEach((contact) => {
       this.contactSubService = this.authService.getUserProfile(contact.uid).pipe(first()).subscribe(res => {
+        console.log(res);
         this.contactDetails.push(res[0])
       })
     })
   }
 
+  updateContact(){
+    this.getContactDetails();
+  }
 }

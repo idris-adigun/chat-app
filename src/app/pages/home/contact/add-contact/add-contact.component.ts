@@ -8,6 +8,7 @@ import { first } from 'rxjs/operators';
 import { ViewContactComponent } from '../view-contact/view-contact.component';
 import { setUserProfile } from 'src/app/shared/actions/user.actions';
 import { Store } from '@ngxs/store';
+import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-add-contact',
@@ -22,10 +23,12 @@ export class AddContactComponent implements OnInit {
   users;
   contacts;
   contact: Contact;
-
+  errorMessage;
   submitBtnStatus : boolean = false;
+  horizontalPosition: MatSnackBarHorizontalPosition = 'center';
+  verticalPosition: MatSnackBarVerticalPosition = 'top';
 
-  constructor(public dialog: MatDialog, private contactService : ContactService, private store: Store) { 
+  constructor(public dialog: MatDialog, private contactService : ContactService, private store: Store, private _snackBar: MatSnackBar) { 
   }
 
   ngOnInit(): void {
@@ -46,9 +49,15 @@ export class AddContactComponent implements OnInit {
             this.submitBtnStatus = false;
           }
           else{
-            console.log('No user found!')
+            
+            this.sendNotification("No user found!", 'failed');
+            this.errorMessage = 'No user found!';
             this.submitBtnStatus = false;
           }
+        },
+        error =>{
+          console.log(error);
+          this.submitBtnStatus = false;
         }
       );
     }
@@ -75,6 +84,7 @@ export class AddContactComponent implements OnInit {
     this.contactService.addToContact(this.contact, this.uid).then(
       res=> {
         console.log(res)
+        this.users = [];
         this.setUserProfile(this.userProfile);
       }
     );
@@ -98,6 +108,15 @@ export class AddContactComponent implements OnInit {
        data: contact
      });
    }
+
+   
+  sendNotification(text, action){
+    this._snackBar.open(text, action, {
+      duration: 10000,
+      horizontalPosition: this.horizontalPosition,
+      verticalPosition: this.verticalPosition,
+    });
+  }
 
      // Add user profile to the state
   setUserProfile(userProfile: UserProfile){

@@ -1,4 +1,10 @@
 <div class="contact">
+    <div style="text-align: center; padding: 5px 5px;">
+        <button mat-button (click)="updateContact()">Refresh</button>
+    </div>
+    <div *ngIf="contactDetails.length <= 0">
+        No contact added!
+    </div>
     <div *ngFor="let contact of contactDetails">
         <div class="contact-list">
             <div class="profile">

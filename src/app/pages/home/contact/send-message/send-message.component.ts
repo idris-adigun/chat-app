@@ -33,7 +33,7 @@ export class SendMessageComponent implements OnInit {
     ngOnDestroy(): void {
       //Called once, before the instance is destroyed.
       //Add 'implements OnDestroy' to the class.
-      this.conversationServiceSub.unsubscribed(); //Unsubscribed from conversation service when component is destroyed
+      // this.conversationServiceSub.unsubscribed(); //Unsubscribed from conversation service when component is destroyed
       
     }
 
@@ -103,6 +103,7 @@ export class SendMessageComponent implements OnInit {
       console.log(error)
     })
   }
+
 
 
 }

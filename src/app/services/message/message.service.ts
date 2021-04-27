@@ -31,9 +31,9 @@ export class MessageService {
     )
   }
 
-  getMoreMessages(conversationId, startAt){
+  getMoreMessages(conversationId, lastRetrieveDate){
     this.messageCollection = this.afs.collection<Message>('Message', 
-    ref => ref.where('conversationId', '==', conversationId).where('date_sent', '<', startAt).orderBy('date_sent', 'desc').limit(5));
+    ref => ref.where('conversationId', '==', conversationId).where('date_sent', '<', lastRetrieveDate).orderBy('date_sent', 'desc').limit(5));
 
     return this.messageCollection.snapshotChanges().pipe(
       map(actions => actions.map(res => {
