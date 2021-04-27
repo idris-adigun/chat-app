@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { InboxRoutingModule } from './inbox-routing.module';
 import { InboxComponent } from './inbox.component';
@@ -14,7 +15,9 @@ import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.compo
   imports: [
     CommonModule,
     InboxRoutingModule,
-    MatModule
+    MatModule,
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class InboxModule { }

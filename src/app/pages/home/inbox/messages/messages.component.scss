@@ -23,7 +23,7 @@
       .conversations {
         padding: 0px 20px;
         display: flex;
-        flex-direction: column;
+        flex-direction: column-reverse;
         overflow-y: scroll;
         height: 500px;
 
@@ -59,6 +59,11 @@
       position: sticky;
       position: -webkit-sticky;
       bottom: 5px;
+
+      .field {
+        width: 100%;
+        height: 100%;
+      }
     }
   }
 }

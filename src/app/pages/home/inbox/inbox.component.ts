@@ -73,15 +73,17 @@ export class InboxComponent implements OnInit {
         (uid) => this.getUserDetails(uid)
       )}
     });
+    console.log(this.conversationWithContDetails)
   }
 
   getUserDetails(uid){
-    let contactDetails = { username: '', profileImageUrl: '' };
+    let contactDetails = { username: '', profileImageUrl: '', uid: '' };
     this.userProfileSub = this.auth.getUserProfile(uid).pipe(first()).subscribe(
       (res) => {
         if(res.length > 0){
           contactDetails.username = res[0].username;
           contactDetails.profileImageUrl = res[0].profileImageUrl;
+          contactDetails.uid = res[0].uid;
         }
       })
       return contactDetails;

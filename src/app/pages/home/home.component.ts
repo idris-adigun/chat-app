@@ -42,8 +42,8 @@ export class HomeComponent implements OnInit {
   ngOnDestroy(): void {
     this.mobileQuery.removeEventListener('change', this._mobileQueryListener);
     // Unsubscribe from services
-    this.userStatusSub.unsubscribe()
-    this.userProfileSub.unsubscribe()
+    // this.userStatusSub.unsubscribe()
+    // this.userProfileSub.unsubscribe()
   }
 
   //check if user is logged in

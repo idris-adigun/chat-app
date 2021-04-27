@@ -19,7 +19,7 @@ export class MessageService {
   // Get all messages based on conversation id
   getMessages(conversationId){
     this.messageCollection = this.afs.collection<Message>('Message', 
-    ref => ref.where('conversationId', '==', conversationId).orderBy('date_sent', 'asc'));
+    ref => ref.where('conversationId', '==', conversationId).orderBy('date_sent', 'desc'));
 
     return this.messageCollection.snapshotChanges().pipe(
       map(messages => messages.map(res => {
