@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { MessageService } from 'src/app/services/message/message.service';
 import { Message } from 'src/app/shared/models/message.model';
 import { ActivatedRoute } from '@angular/router';
 import { Select } from '@ngxs/store'; 
 import { ConversationService } from 'src/app/services/conversation/conversation.service';
 import { first } from 'rxjs/operators';
+import { Directive, HostListener } from '@angular/core'
 
 @Component({
   selector: 'app-messages',
@@ -13,14 +14,16 @@ import { first } from 'rxjs/operators';
 })
 export class MessagesComponent implements OnInit {
   @Select() userProfile$;
+  @ViewChild('conversationDiv') conversationDiv: ElementRef;
   uid: string = '';
   conversation;
   conversation_id: string;
   content = {} as Message;
-  messages : Message[]
+  messages : any[]
   messageSub;
   conversationServiceSub;
-  firstRetrieve;
+  lastRetrieveDate;
+  lastMessageLenght = 5;
   contactUid;
 
   constructor(private messageService : MessageService,private route: ActivatedRoute, private conversationService: ConversationService){
@@ -36,12 +39,37 @@ export class MessagesComponent implements OnInit {
 
   }
 
-    scrollHandler(e) {
-    // console.log(e)
-    // should log top or bottom
-    if(e === 'top'){
-      console.log('reached top, load more')
+  loadMoreMessages(){
+
+    let lastIndex = this.messages.length;
+    this.lastRetrieveDate = this.messages[lastIndex-1].date_sent; //Get the last date on current message
+
+    this.conversationDiv.nativeElement.scroll({
+      top: this.conversationDiv.nativeElement.scrollHeight + 100,
+      left: 0,
+      behavior: 'smooth'
+  }) 
+    // Check if the lenght of the last messages added is atleast 5
+    if(this.lastMessageLenght !== 5){
+      console.log('Last Message reached')
     }
+    else{
+      this.messageService.getMoreMessages(this.conversation_id, this.lastRetrieveDate).pipe(first()).subscribe(res => {
+        console.log(res)
+        if(res.length > 0){
+          this.lastMessageLenght = res.length;
+          let updatedMessages = this.messages.concat(res);
+          let lastIndex = this.messages.length;
+          this.lastRetrieveDate = updatedMessages[lastIndex-1].date_sent;
+          console.log(this.lastRetrieveDate)
+          this.messages = updatedMessages;
+        }
+        else{
+          console.log('No more messages')
+        }
+      });
+    }
+    // }
   }
  
   ngOnInit():void {
@@ -66,10 +94,8 @@ export class MessagesComponent implements OnInit {
   getMessage(){
     this.messageSub = this.messageService.getMessages(this.conversation_id).subscribe(
       (res: any) => {
+        console.log(res)
         this.messages = res;
-        
-        this.firstRetrieve = this.messages[0].date_sent;
-        // console.log(this.firstRetrieve)
       },
       error => {
         console.log('unable to retrieve messages', error);
@@ -89,7 +115,7 @@ export class MessagesComponent implements OnInit {
           conversationId: this.conversation_id
       }
       this.messageService.addMessage(this.content).then(res => console.log(res));
-      
+            // TODO: update message conversation date and last message
       form.reset();
     }
   }

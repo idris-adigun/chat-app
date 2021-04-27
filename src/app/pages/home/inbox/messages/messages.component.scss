@@ -27,6 +27,11 @@
         overflow-y: scroll;
         height: 500px;
 
+        .load-more-btn {
+          position: sticky;
+          bottom: 0;
+        }
+
         .message {
           background-color: $card-color;
           padding: 15px;

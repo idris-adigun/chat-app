@@ -19,7 +19,7 @@ export class MessageService {
   // Get all messages based on conversation id
   getMessages(conversationId){
     this.messageCollection = this.afs.collection<Message>('Message', 
-    ref => ref.where('conversationId', '==', conversationId).orderBy('date_sent', 'desc'));
+    ref => ref.where('conversationId', '==', conversationId).orderBy('date_sent', 'desc').limit(5));
 
     return this.messageCollection.snapshotChanges().pipe(
       map(messages => messages.map(res => {
@@ -31,16 +31,16 @@ export class MessageService {
     )
   }
 
-  // getMoreMessages(conversationId, startAt){
-  //   this.messageCollection = this.afs.collection<Message>('Message', 
-  //   ref => ref.where('conversationId', '==', conversationId).orderBy('date_sent', 'desc').startAt(startAt).limit(5));
+  getMoreMessages(conversationId, startAt){
+    this.messageCollection = this.afs.collection<Message>('Message', 
+    ref => ref.where('conversationId', '==', conversationId).where('date_sent', '<', startAt).orderBy('date_sent', 'desc').limit(5));
 
-  //   return this.messageCollection.snapshotChanges().pipe(
-  //     map(actions => actions.map(res => {
-  //       const data = res.payload.doc.data() as Message;
-  //       return data
-  //     }))
-  //   )
-  // }
+    return this.messageCollection.snapshotChanges().pipe(
+      map(actions => actions.map(res => {
+        const data = res.payload.doc.data() as Message;
+        return data
+      }))
+    )
+  }
 
 }

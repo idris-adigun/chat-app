@@ -3,8 +3,14 @@
         <div class="conversations-section">
             <div class="header">
                 <button mat-button  [routerLink]="['/home/inbox/']"><mat-icon>arrow_back</mat-icon> Back</button>
+                <div>
+                    <img src="">
+                </div>
             </div>
-            <div class="conversations" scrollable (scrollPosition)="scrollHandler($event)">
+            <div style="text-align: center">
+                <button mat-button class="load-more-btn" (click)="loadMoreMessages()">Load more</button>
+            </div>
+            <div class="conversations" #conversationDiv>
                 <div *ngFor="let message of messages" class="px-4">
                         <div class="message" [ngClass]="{'right' : message.sender === uid, 'left' : message.sender !== uid}">
                             <div class="message-content">
