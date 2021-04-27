@@ -18,12 +18,12 @@
         <div class="message-form"> 
             <form class="search-form" #messageForm="ngForm"> 
                 <mat-form-field class="field message-field">
-                <mat-label>Message</mat-label>
-                <textarea  matInput type="text" [ngClass] = "{'is-invalid': message.errors?.required && message.touched}"
-                [(ngModel)] = "content.message" name="message" #message = "ngModel"  autofocus="" placeholder="..."  inputmode="text"  required  ></textarea>
+                    <mat-label>Message</mat-label>
+                    <textarea  matInput type="text" [ngClass] = "{'is-invalid': message.errors?.required && message.touched}"
+                    [(ngModel)] = "content.message" name="message" #message = "ngModel"  autofocus="" placeholder="..."  inputmode="text"  required  ></textarea>
                 </mat-form-field>
                 <div>
-                    <button mat-raised-button class="search-btn" (click)="sendMessage(messageForm)"><mat-icon>send</mat-icon></button>
+                    <button mat-button class="search-btn" type="submit" (click)="sendMessage(messageForm)"><mat-icon>send</mat-icon></button>
                 </div>
             </form>
         </div>

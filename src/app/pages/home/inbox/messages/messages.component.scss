@@ -60,9 +60,20 @@
       position: -webkit-sticky;
       bottom: 5px;
 
+      .search-form {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+      }
+
       .field {
         width: 100%;
         height: 100%;
+
+        .search-btn {
+          height: 100%;
+          width: 100%;
+        }
       }
     }
   }
