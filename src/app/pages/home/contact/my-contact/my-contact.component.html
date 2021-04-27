@@ -1,22 +1,31 @@
 <div class="contact">
-    <div style="text-align: center; padding: 5px 5px;">
+    <div class="refresh">
         <button mat-button (click)="updateContact()">Refresh</button>
+        <div *ngIf="loading">
+            <div class="sk-flow" style="margin-top: 5px;">
+                <div class="sk-flow-dot"></div>
+                <div class="sk-flow-dot"></div>
+                <div class="sk-flow-dot"></div>
+            </div>
+        </div>
     </div>
-    <div *ngIf="contactDetails.length <= 0">
+    <div *ngIf="contactDetails.length <= 0" style="text-align: center;">
         No contact added!
     </div>
-    <div *ngFor="let contact of contactDetails">
-        <div class="contact-list">
-            <div class="profile">
-                <img src="{{contact.profileImageUrl}}" class="profile-image">
-            </div>
-            <div class="summary">
-                <div class="name">
-                    {{contact.username}}
+    <div  *ngIf="!loading">
+        <div *ngFor="let contact of contactDetails">
+            <div class="contact-list">
+                <div class="profile">
+                    <img src="{{contact.profileImageUrl}}" class="profile-image">
                 </div>
-                <div class="view-contact ">
-                    <mat-icon (click)="startConversation(contact)">chat_bubble_outline</mat-icon>
-                    <mat-icon (click)="viewContact(contact)">launch</mat-icon>
+                <div class="summary">
+                    <div class="name">
+                        {{contact.username}}
+                    </div>
+                    <div class="view-contact ">
+                        <mat-icon (click)="startConversation(contact)">chat_bubble_outline</mat-icon>
+                        <mat-icon (click)="viewContact(contact)">launch</mat-icon>
+                    </div>
                 </div>
             </div>
         </div>

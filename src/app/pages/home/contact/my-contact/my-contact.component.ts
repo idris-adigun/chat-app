@@ -20,7 +20,7 @@ export class MyContactComponent implements OnInit {
   contactDetails = [];
   contactSubService;
   defaultMessage = 'No contact added!';
-
+  loading = true;
   constructor(public dialog: MatDialog, private contactService : ContactService, private authService: AuthService) {
    }
 
@@ -66,12 +66,14 @@ export class MyContactComponent implements OnInit {
     this.contacts.forEach((contact) => {
       this.contactSubService = this.authService.getUserProfile(contact.uid).pipe(first()).subscribe(res => {
         console.log(res);
+        this.loading = false;
         this.contactDetails.push(res[0])
       })
     })
   }
 
   updateContact(){
+    this.loading = true;
     this.getContactDetails();
   }
 }

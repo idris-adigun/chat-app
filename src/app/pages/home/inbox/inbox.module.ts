@@ -7,11 +7,10 @@ import { InboxComponent } from './inbox.component';
 import { MessagesComponent } from './messages/messages.component';
 import { MatModule } from '../../../module/mat/mat.module';
 import { ScrollableDirective } from '../../../directives/scrollable.directive';
-import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.component';
 
 
 @NgModule({
-  declarations: [InboxComponent, MessagesComponent, ScrollableDirective, LoadingSpinnerComponent],
+  declarations: [InboxComponent, MessagesComponent, ScrollableDirective],
   imports: [
     CommonModule,
     InboxRoutingModule,

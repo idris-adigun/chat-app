@@ -98,7 +98,9 @@ export class AddContactComponent implements OnInit {
       contact.uid === user[0].uid ? isFound = true : ''
     });
     // Set is added to true is user is already a contact and false otherwise
-    isFound ? user[0].isAdded = true : user[0].isAdded = false
+    isFound ? user[0].isAdded = true : user[0].isAdded = false;
+    
+    this.sendNotification("Contact added!", 'Success');
   }
 
   // 

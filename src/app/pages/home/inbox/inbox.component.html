@@ -1,29 +1,40 @@
 <div class="container">
     <div class="conversations">
-        <div *ngFor="let conversation of conversationWithContDetails">
-            <div class="conversation-list" [routerLink]="['messages']" [queryParams]="{ id: conversation.uid, contact: conversation.member[0].uid}">
-                <div *ngFor="let member of conversation.member">
-                    <div class="profile">
-                        <img src="{{member.profileImageUrl}}" class="profile-image">
-                    </div>
-                </div>
-                <div class="summary">
-                    <div class="member-details">
-                        <div *ngFor="let member of conversation.member">
-                            <div class="name">
-                                {{member.username}}
-                            </div>
-                        </div>
-                        <div class="last_message">
-                            {{conversation.lastMessage}}
-                        </div>
-                    </div>
-                    <div class="conversation-date">
-                        {{conversation.lastUpdated.toDate() | date:'shortDate' }}
-                    </div>
+        <div class="refresh">
+            <button mat-button (click)="updateConservation()">Refresh</button>
+            <div *ngIf="loading">
+                <div class="sk-flow" style="margin-top: 5px;">
+                    <div class="sk-flow-dot"></div>
+                    <div class="sk-flow-dot"></div>
+                    <div class="sk-flow-dot"></div>
                 </div>
             </div>
         </div>
+        <div   *ngIf="!loading">
+            <div *ngFor="let conversation of conversationWithContDetails">
+                <div class="conversation-list" [routerLink]="['messages']" [queryParams]="{ id: conversation.uid, contact: conversation.member[0].uid}">
+                    <div *ngFor="let member of conversation.member">
+                        <div class="profile">
+                            <img src="{{member.profileImageUrl}}" class="profile-image">
+                        </div>
+                    </div>
+                    <div class="summary">
+                        <div class="member-details">
+                            <div *ngFor="let member of conversation.member">
+                                <div class="name">
+                                    {{member.username}}
+                                </div>
+                            </div>
+                            <div class="last_message">
+                                {{conversation.lastMessage}}
+                            </div>
+                        </div>
+                        <div class="conversation-date">
+                            {{conversation.lastUpdated.toDate() | date:'shortDate' }}
+                        </div>
+                    </div>
+                </div>
+            </div></div>
     </div>
 </div>
 

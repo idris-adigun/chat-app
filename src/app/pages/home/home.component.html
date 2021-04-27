@@ -5,7 +5,6 @@
         <mat-drawer #drawer class="sidenav" opened="true" [mode]="mobileQuery.matches ? 'over' : 'side'">
           <app-sidebar [userProfile]="userProfile"></app-sidebar>
         </mat-drawer>
-      
         <div>
           <router-outlet></router-outlet>
         </div>

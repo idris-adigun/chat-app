@@ -20,6 +20,7 @@ export class InboxComponent implements OnInit {
   conversations : Conversation [];
   filteredconversations : Conversation [];
   conversationWithContDetails = [];
+  loading = true;
   constructor(private conversationService: ConversationService, private auth: AuthService) { 
     this.getUserId();
     this.getConversation();
@@ -48,6 +49,7 @@ export class InboxComponent implements OnInit {
         this.conversations = res;
         this.filterOutCurrentUser();
         this.getConversationMemberDetails();
+        this.loading = false;
       }
       else{
         console.log('No conversation found!');
@@ -87,6 +89,11 @@ export class InboxComponent implements OnInit {
         }
       })
       return contactDetails;
+  }
+  
+  updateConservation(){
+    this.loading = true;
+    this.getConversation();
   }
 }
 

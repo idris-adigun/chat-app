@@ -1,4 +1,11 @@
 @import "../../../../../theme.scss";
+
+.refresh {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 .contact-list {
   display: flex;
   flex-direction: row;
