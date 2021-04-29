@@ -6,6 +6,13 @@
   width: 250px;
   height: 100%;
 
+  .edit-photo {
+    text-align: center;
+    font-size: 13px;
+    font-weight: 500px;
+    cursor: pointer;
+  }
+
   .profile-image {
     border-radius: 50%;
   }
@@ -17,7 +24,7 @@
     color: $primary;
   }
   .nav {
-    padding-top: 20px;
+    padding-top: 10px;
   }
   .nav-list {
     padding: 0px 0px 10px 0px;
@@ -26,4 +33,11 @@
   .nav-item {
     font-size: 19px;
   }
+}
+
+input[type="file"] {
+  width: 200px;
+  vertical-align: middle;
+  margin-bottom: 0px;
+  height: 0px;
 }

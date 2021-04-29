@@ -19,6 +19,7 @@ export class MessagesComponent implements OnInit {
   conversation;
   conversation_id: string;
   content = {} as Message;
+  message : any;
   messages : any[]
   messageSub;
   conversationServiceSub;
@@ -114,8 +115,15 @@ export class MessagesComponent implements OnInit {
           message: form.value.message,
           conversationId: this.conversation_id
       }
-      this.messageService.addMessage(this.content).then(res => console.log(res));
-            // TODO: update message conversation date and last message
+      this.messageService.addMessage(this.content).then(res => {
+        console.log(res)
+        //update message conversation date and last message
+        console.log(`Update last message with ${this.content.message}`)
+        this.conversationService.updateConversation(this.conversation_id, this.content.message, this.content.date_sent)
+      })
+      .catch(error => {
+        console.log(error)
+      });
       form.reset();
     }
   }

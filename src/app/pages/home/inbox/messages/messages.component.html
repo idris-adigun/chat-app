@@ -25,8 +25,7 @@
             <form class="search-form" #messageForm="ngForm"> 
                 <mat-form-field class="field message-field">
                     <mat-label>Message</mat-label>
-                    <textarea  matInput type="text" [ngClass] = "{'is-invalid': message.errors?.required && message.touched}"
-                    [(ngModel)] = "content.message" name="message" #message = "ngModel"  autofocus="" placeholder="..."  inputmode="text"  required  ></textarea>
+                    <textarea  matInput type="text" [(ngModel)] = "message" name="message"   autofocus="" placeholder="..."  inputmode="text"  required  ></textarea>
                 </mat-form-field>
                 <div>
                     <button mat-button class="search-btn" type="submit" (click)="sendMessage(messageForm)"><mat-icon>send</mat-icon></button>

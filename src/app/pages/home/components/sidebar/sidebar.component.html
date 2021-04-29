@@ -5,12 +5,14 @@
       <div>
         <img src="{{userProfile.profileImageUrl}}" class="profile-image">
       </div>
+      <div class="edit-photo">
+        <div style="text-align: center; visibility: hidden;"><input type="file" accept="image/*" #file></div>
+        <button mat-button (click)="file.click()">Change Photo</button>
+      </div>
       <div class="profile-name">
-        {{userProfile.username}}
+        Welcome, {{userProfile.username}}
       </div>
     </div>
-    
-    
     <ul style="list-style: none;" class="nav" >
         <li class="nav-list">
           <button mat-button class="nav-item"  [routerLink]="['/']">Home <mat-icon inline="true" class="material-icons-outlined">home</mat-icon></button>
