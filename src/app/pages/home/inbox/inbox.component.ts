@@ -22,11 +22,11 @@ export class InboxComponent implements OnInit {
   conversationWithContDetails = [];
   loading = true;
   constructor(private conversationService: ConversationService, private auth: AuthService) { 
-    this.getUserId();
-    this.getConversation();
   }
   ngOnInit(): void {
     this.userProfile$.subscribe(res => this.userDetails = res);
+    this.getUserId();
+    this.getConversation();
   }
 
   ngOnDestroy(){
