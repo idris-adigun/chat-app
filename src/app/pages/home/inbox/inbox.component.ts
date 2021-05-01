@@ -48,7 +48,6 @@ export class InboxComponent implements OnInit {
       if(res.length > 0){
         this.conversations = res;
         this.filterOutCurrentUser();
-        this.getConversationMemberDetails();
         this.loading = false;
       }
       else{
@@ -66,6 +65,7 @@ export class InboxComponent implements OnInit {
      this.filteredconversations = this.conversations.map((conversation => {
       return {...conversation, member: conversation.member.filter((uid => uid !== this.uid))}
      }));
+     this.getConversationMemberDetails();
   }
 
   //For each members in the filtered conversation, get their profile details

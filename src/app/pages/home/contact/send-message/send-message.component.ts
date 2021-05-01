@@ -54,13 +54,12 @@ export class SendMessageComponent implements OnInit {
       }
     }
 
-    formatMessage(message, conversationId) : Message{
+    formatMessage(message) : Message{
       return {
         sender: this.senderId,
         recipient: this.recipientId,
         date_sent: new Date(),
-        message: message, 
-        conversationId: conversationId
+        message: message
       }
     }
 
@@ -68,7 +67,7 @@ export class SendMessageComponent implements OnInit {
     if(form.valid){
       this.conversationId = this.createConversationId(this.senderId, this.recipientId);
       let conversation = this.formatConversation(form.value.message);
-      let message = this.formatMessage(form.value.message, conversation.uid);
+      let message = this.formatMessage(form.value.message);
 
       // Check If conversation exist before creating a new one and adding message
      this.conversationServiceSub =  this.conversationService.checkConversation(conversation.uid).pipe(first()).subscribe(res =>{
@@ -90,14 +89,14 @@ export class SendMessageComponent implements OnInit {
 
   
   startNewConversation(conversation){
-    this.conversationService.startConversation(conversation).then(res => {
-      res ? console.log('Starting a new conversation') : '';
+    this.conversationService.startConversation(conversation, this.conversationId).then(res => {
+      console.log(res)
     }).catch(e => console.log(e));
 
   }
 
   addMessage(message){
-    this.messageService.addMessage(message).then(res => {
+    this.messageService.addMessage(message, this.conversationId).then(res => {
       this.dialogRef.close()
     }, (error) => {
       console.log(error)

@@ -77,7 +77,6 @@ export class AuthService {
     )
     return this.profiles;
   }
-
   
   checkLogin()
   {

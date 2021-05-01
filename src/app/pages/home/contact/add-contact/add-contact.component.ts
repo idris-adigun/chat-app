@@ -85,6 +85,7 @@ export class AddContactComponent implements OnInit {
       res=> {
         console.log(res)
         this.users = [];
+        this.sendNotification("Contact added!", 'Success');
         this.setUserProfile(this.userProfile);
       }
     );
@@ -100,7 +101,6 @@ export class AddContactComponent implements OnInit {
     // Set is added to true is user is already a contact and false otherwise
     isFound ? user[0].isAdded = true : user[0].isAdded = false;
     
-    this.sendNotification("Contact added!", 'Success');
   }
 
   // 

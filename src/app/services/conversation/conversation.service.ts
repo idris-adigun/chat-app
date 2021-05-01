@@ -42,13 +42,8 @@ export class ConversationService {
   }
 
   // Create Conversation by adding sender and recipient Id to member array
-  startConversation(conversation){
-    this.conversationCollection = this.afs.collection<Conversation>('Conversation');
-    return new Promise<any>((resolve, reject) => {
-      this.conversationCollection.add(conversation).then(
-        res => resolve(res)
-      ).catch(e => reject(e))
-    })
+  startConversation(conversation, conversation_id){
+      return this.afs.collection<Conversation>('Conversation').doc(conversation_id).set(conversation)
   }
 
   // Get Conversation the user is a member of
