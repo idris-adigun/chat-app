@@ -1,0 +1,32 @@
+<div class="dialog-content">
+    <div mat-dialog-title style="text-align: center;">Image Uploader</div>
+    <mat-dialog-content>
+        <div style="text-align: center; " (change)="changeProfileImage($event)"><input type="file" accept="image/*" #file></div>
+        <div>
+            <div *ngIf="uploadingStatus" style="text-align: center;">
+                <div class="sk-flow" style="margin-top: 5px;">
+                    <div class="sk-flow-dot"></div>
+                    <div class="sk-flow-dot"></div>
+                    <div class="sk-flow-dot"></div>
+                </div>
+            </div>
+        </div>
+        
+        <image-cropper
+            [imageChangedEvent]="imageChangedEvent"
+            format="png"
+            (imageCropped)="imageCropped($event)"
+            (imageLoaded)="image"
+            [cropperMaxHeight]="maxCropHeight"
+            [cropperMaxWidth]="maxCropWidth"
+            [cropperMinHeight]="maxCropHeight"
+            [cropperMinWidth]="maxCropWidth"
+        ></image-cropper>
+    </mat-dialog-content>
+
+    <mat-dialog-actions align="end">
+        <button mat-raised-button (click)="closeDialog()">Close</button>
+        <button mat-raised-button (click)="uploadImage()" [disabled]="uploadingStatus">Upload Image</button>
+    </mat-dialog-actions>
+</div>
+

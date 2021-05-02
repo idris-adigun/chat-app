@@ -18,7 +18,8 @@
                 <div class="conversation-list" [routerLink]="['messages']" [queryParams]="{ id: conversation.uid, contact: conversation.member[0].uid}">
                     <div *ngFor="let member of conversation.member">
                         <div class="profile">
-                            <img src="{{member.profileImageUrl}}" class="profile-image">
+                            <img *ngIf="member.profileImageUrl" src="{{member.profileImageUrl}}" class="profile-image">
+                            <img *ngIf="!member.profileImageUrl" src="./assets/imgs/default.png" class="profile-image">
                         </div>
                     </div>
                     <div class="summary">

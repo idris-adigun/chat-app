@@ -8,20 +8,27 @@ import { HomeComponent } from './home.component';
 import { MatModule } from '../../module/mat/mat.module';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { WelcomeComponent } from './welcome/welcome.component';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
+// Image Cropper
+import { ImageCropperModule } from 'ngx-image-cropper';
+import { ImageResizerComponent } from './components/image-resizer/image-resizer.component';
 @NgModule({
   declarations: [
     HomeComponent,
     SidebarComponent,
     ToolbarComponent,
-    WelcomeComponent
+    WelcomeComponent,
+    ImageResizerComponent
   ],
   imports: [
     CommonModule,
     HomeRoutingModule,
     MatModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ImageCropperModule,
+    MatSnackBarModule
   ]
 })
 export class HomeModule { }

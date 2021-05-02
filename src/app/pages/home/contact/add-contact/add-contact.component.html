@@ -20,7 +20,8 @@
     <div *ngIf="users">
       <div class="contact-list"  *ngFor="let user of users;  index as i">
             <div class="profile">
-                <img src="{{user.profileImageUrl}}" class="profile-image">
+                <img class="profile-image"  *ngIf="userProfile.profileImageUrl" src="{{user.profileImageUrl}}" class="profile-image">
+                <img class="profile-imgage"  *ngIf="!user.profileImageUrl" src="./assets/imgs/default.png" class="profile-image">
             </div>
             <div class="summary">
                 <div class="name">

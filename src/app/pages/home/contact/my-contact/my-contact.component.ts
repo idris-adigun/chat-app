@@ -21,7 +21,7 @@ export class MyContactComponent implements OnInit {
   contactSubService;
   defaultMessage = 'No contact added!';
   loading = true;
-  constructor(public dialog: MatDialog, private contactService : ContactService, private authService: AuthService) {
+  constructor(public dialog: MatDialog,private authService: AuthService) {
    }
 
   ngOnInit(): void {

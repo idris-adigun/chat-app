@@ -1,7 +1,8 @@
 
 <div class="contact">
     <div>
-        <img class="profile-img" src="{{contact.profileImageUrl}}">
+        <img class="profile-img"  *ngIf="contact.profileImageUrl" src="{{contact.profileImageUrl}}" class="profile-image">
+        <img class="profile-img"  *ngIf="!contact.profileImageUrl" src="./assets/imgs/default.png" class="profile-image">
     </div>
 
     <div class="info">

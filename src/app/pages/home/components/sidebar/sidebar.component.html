@@ -3,11 +3,11 @@
   <div class="sidenav">
     <div class="profile">
       <div>
-        <img src="{{userProfile.profileImageUrl}}" class="profile-image">
+        <img class="profile-image"  *ngIf="userProfile.profileImageUrl" src="{{userProfile.profileImageUrl}}" class="profile-image">
+        <img class="profile-imgage"  *ngIf="!userProfile.profileImageUrl" src="./assets/imgs/default.png" class="profile-image">
       </div>
       <div class="edit-photo">
-        <div style="text-align: center; visibility: hidden;" (change)="changeProfileImage($event)"><input type="file" accept="image/*" #file></div>
-        <button mat-button (click)="file.click()">Change Photo</button>
+        <button mat-button (click)="openImageCropper()">Change Photo</button>
       </div>
       <div class="profile-name">
         Welcome, {{userProfile.username}}

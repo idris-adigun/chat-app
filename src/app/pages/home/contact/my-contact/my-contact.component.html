@@ -16,7 +16,8 @@
         <div *ngFor="let contact of contactDetails">
             <div class="contact-list">
                 <div class="profile">
-                    <img src="{{contact.profileImageUrl}}" class="profile-image">
+                    <img class="profile-image"  *ngIf="contact.profileImageUrl" src="{{contact.profileImageUrl}}" class="profile-image">
+                    <img class="profile-imgage"  *ngIf="!contact.profileImageUrl" src="./assets/imgs/default.png" class="profile-image">
                 </div>
                 <div class="summary">
                     <div class="name">
