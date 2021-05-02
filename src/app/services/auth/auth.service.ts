@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreCollection,  } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { User, UserProfile } from '../../shared/models/user.model';
-import { map } from 'rxjs/operators';
+import { finalize, map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +12,7 @@ export class AuthService {
   userProfileCollection: AngularFirestoreCollection<UserProfile>
   userProfiles: Observable<UserProfile[]>;
   profiles: Observable<UserProfile[]>;
+  downloadURL: Observable<string>;
   constructor(public auth: AngularFireAuth, private afs: AngularFirestore) { }
 
   // Register
@@ -77,19 +78,21 @@ export class AuthService {
     )
     return this.profiles;
   }
+
+
+  // Update user's profile url
+  updateProfileUrl(uid, newProfileUrl){
+    return this.afs.collection<UserProfile>('UserProfile').doc(uid).update({
+      profileImageUrl : newProfileUrl
+    })
+  }
+
+
   
-  checkLogin()
-  {
+  checkLogin(){
       return new Promise((resolve, reject) => {
         this.auth.onAuthStateChanged(user => {
-           if(user)
-           {
-              resolve(user);
-           }
-           else
-           {
-             reject('not signed in')
-           }
+           user ? resolve(user) : reject('not signed in')
         });
      });
   }

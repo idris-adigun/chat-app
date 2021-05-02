@@ -6,7 +6,7 @@
         <img src="{{userProfile.profileImageUrl}}" class="profile-image">
       </div>
       <div class="edit-photo">
-        <div style="text-align: center; visibility: hidden;"><input type="file" accept="image/*" #file></div>
+        <div style="text-align: center; visibility: hidden;" (change)="changeProfileImage($event)"><input type="file" accept="image/*" #file></div>
         <button mat-button (click)="file.click()">Change Photo</button>
       </div>
       <div class="profile-name">
