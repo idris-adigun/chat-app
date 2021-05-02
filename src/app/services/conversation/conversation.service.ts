@@ -15,16 +15,14 @@ export class ConversationService {
 
   // check if conversation exist 
   checkConversation(conversationId){
-      this.conversationCollection = this.afs.collection<Conversation>('Conversation', ref => {
-        return ref.where('uid', '==', conversationId);
-      });    
-      return this.conversationCollection.snapshotChanges().pipe(
-        map(actions => actions.map(res => {
-          const data = res.payload.doc.data() as Conversation;
-          console.log(data);
-          return data
-        }))
-      )
+      return this.afs.collection<Conversation>('Conversation').doc(conversationId).get();
+      // return this.conversationCollection.snapshotChanges().pipe(
+      //   map(actions => actions.map(res => {
+      //     const data = res.payload.doc.data() as Conversation;
+      //     console.log(data);
+      //     return data
+      //   }))
+      // )
   }
 
   // Update Conversation with the latest message and last updated

@@ -25,6 +25,7 @@ export class InboxComponent implements OnInit {
     this.userProfile$.subscribe(res => this.userDetails = res);
     this.getUserId();
     this.getConversation().then(res => {
+      console.log(res)
       if(res){
           this.filterOutCurrentUser();
           this.getConversationMemberDetails();
@@ -55,11 +56,13 @@ export class InboxComponent implements OnInit {
           console.log(res)
           this.conversations = res;
           this.loading = false;
+          resolve(true);
         }
         else{
           console.log('No conversation found!');
+          this.loading = false;
+          resolve(false);
         }
-        resolve(true);
       },
       error => {
         reject(false)

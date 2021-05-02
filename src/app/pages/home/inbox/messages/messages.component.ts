@@ -96,7 +96,6 @@ export class MessagesComponent implements OnInit {
     // this.messageService.getMessages(this.conversation_id)
     this.messageSub = this.messageService.getMessages(this.conversation_id).subscribe(
       (res: any) => {
-        console.log(res)
         this.messages = res;
       },
       error => {
@@ -108,7 +107,6 @@ export class MessagesComponent implements OnInit {
   
   sendMessage(form){
     if(form.valid){
-      console.log(form.value.message)
       this.content ={
           sender: this.uid,
           recipient: this.contactUid,
@@ -120,7 +118,6 @@ export class MessagesComponent implements OnInit {
           console.log(`Update last message with ${this.content.message}`)
           this.conversationService.updateConversation(this.conversation_id, this.content.message, this.content.date_sent).then(
             res => {
-              console.log(res)
             }
           )
         }
