@@ -24,8 +24,6 @@ export class MessageService {
 
     return this.messageCollection.snapshotChanges().pipe(
       map(messages => messages.map(res => {
-        let startAt  = res.payload.newIndex
-        // console.log(res.payload.newIndex)
         const data = res.payload.doc.data() as Message;
         return data
       }))

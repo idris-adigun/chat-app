@@ -22,11 +22,16 @@ export class InboxComponent implements OnInit {
   conversationWithContDetails = [];
   loading = true;
   constructor(private conversationService: ConversationService, private auth: AuthService) { 
-  }
-  ngOnInit(): void {
     this.userProfile$.subscribe(res => this.userDetails = res);
     this.getUserId();
-    this.getConversation();
+    this.getConversation().then(res => {
+      if(res){
+          this.filterOutCurrentUser();
+          this.getConversationMemberDetails();
+      }
+    });
+  }
+  ngOnInit(): void {
   }
 
   ngOnDestroy(){
@@ -44,18 +49,24 @@ export class InboxComponent implements OnInit {
   }
   // get all users conversation user is a memeber of
   getConversation(){
-    this.conversationSub = this.conversationService.getConversation(this.uid).pipe(first()).subscribe(res =>{
-      if(res.length > 0){
-        this.conversations = res;
-        this.filterOutCurrentUser();
-        this.loading = false;
-      }
-      else{
-        console.log('No conversation found!');
-      }
-    },
-    error => {
-      console.log('Unable to retrieved Conversation');
+    return new Promise<any>((resolve, reject) => {
+      this.conversationSub = this.conversationService.getConversation(this.uid).pipe(first()).subscribe(res =>{
+        if(res.length > 0){
+          console.log(res)
+          this.conversations = res;
+          this.loading = false;
+        }
+        else{
+          console.log('No conversation found!');
+        }
+        resolve(true);
+      },
+      error => {
+        reject(false)
+        console.log('Unable to retrieved Conversation');
+        console.log(error);
+      })
+
     })
   }
 
@@ -65,20 +76,19 @@ export class InboxComponent implements OnInit {
      this.filteredconversations = this.conversations.map((conversation => {
       return {...conversation, member: conversation.member.filter((uid => uid !== this.uid))}
      }));
-     this.getConversationMemberDetails();
   }
 
   //For each members in the filtered conversation, get their profile details
   getConversationMemberDetails(){
     this.conversationWithContDetails =this.filteredconversations.map((conversation) => {
       return {...conversation, member : conversation.member.map(
-        (uid) => this.getUserDetails(uid)
+        (uid) => this.getContactDetails(uid)
       )}
     });
     console.log(this.conversationWithContDetails)
   }
 
-  getUserDetails(uid){
+  getContactDetails(uid){
     let contactDetails = { username: '', profileImageUrl: '', uid: '' };
     this.userProfileSub = this.auth.getUserProfile(uid).pipe(first()).subscribe(
       (res) => {

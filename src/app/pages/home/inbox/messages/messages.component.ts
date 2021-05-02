@@ -118,7 +118,11 @@ export class MessagesComponent implements OnInit {
       this.messageService.addMessage(this.content, this.conversation_id).then(res => {
         if(res){
           console.log(`Update last message with ${this.content.message}`)
-          this.conversationService.updateConversation(this.conversation_id, this.content.message, this.content.date_sent)
+          this.conversationService.updateConversation(this.conversation_id, this.content.message, this.content.date_sent).then(
+            res => {
+              console.log(res)
+            }
+          )
         }
         //update message conversation date and last message
       })
