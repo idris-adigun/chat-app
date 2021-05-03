@@ -12,6 +12,8 @@ After downloading or cloning the repository, the first thing is to make sure all
 ## Firebase setup
 Setup your Firebase Account and place you web config data in environment.ts you are running the app locally or environment.prod.ts if you are running the app in a production environment
 
+## Preview
+https://github.com/idris-adigun/chat-app/tree/master/manual_images
 
 ## Development server
 
@@ -19,6 +21,6 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app w
 
 ## Indexing Data on Firebase
 
-After running the app, you would have to index some data, open Inspect tools on your browser when the app is open, the console would provide you the appropriate link to index your data. 
+After running the app, you would have to index some data, open Inspect tools on your browser when the app is open, the console would provide you the appropriate link to index your data. https://github.com/idris-adigun/chat-app/tree/master/manual_images
 
 Enjoy!
