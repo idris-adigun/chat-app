@@ -52,4 +52,17 @@ export class ContactService {
       }))
     )
   }
+
+  getContactDetails(myContactsIds){
+    this.userProfileCollection = this.afs.collection<UserProfile>('UserProfile', ref => {
+      return ref.where('uid', 'in', myContactsIds)
+    })
+    
+    return this.userProfileCollection.snapshotChanges().pipe(
+      map(actions => actions.map(res => {
+        const data = res.payload.doc.data();
+        return data
+      }))
+    )
+  }
 }

@@ -17,16 +17,16 @@ export class MyContactComponent implements OnInit {
   @Select() userProfile$;
   uid: string = '';
   contacts: Contact[];
-  contactDetails = [];
+  myContactsId = [];
+  myContacts = [];
   contactSubService;
   defaultMessage = 'No contact added!';
   loading = true;
-  constructor(public dialog: MatDialog,private authService: AuthService) {
+  constructor(public dialog: MatDialog,private authService: AuthService, private contactService: ContactService) {
    }
 
   ngOnInit(): void {
     this.getUserId();
-    this.getContactDetails();
   }
   ngOnDestroy(): void {
     //Called once, before the instance is destroyed.
@@ -39,6 +39,12 @@ export class MyContactComponent implements OnInit {
         this.uid = res.userProfile.uid
         this.contacts = res.userProfile.contacts
     });
+    this.contacts.forEach(
+      contact => {
+        this.myContactsId.push(contact.uid)
+      }
+    );
+    this.getContactDetails();
   }
   
   viewContact(contact): void {
@@ -58,22 +64,17 @@ export class MyContactComponent implements OnInit {
       });
   }
 
-
-  getContactDetails()
-  {
-    this.contactDetails = [];
-    console.log(this.contacts)
-    this.contacts.forEach((contact) => {
-      this.contactSubService = this.authService.getUserProfile(contact.uid).pipe(first()).subscribe(res => {
-        console.log(res);
+  getContactDetails(){
+    this.contactService.getContactDetails(this.myContactsId).pipe(first()).subscribe(
+      res => {
+        this.myContacts = res;
         this.loading = false;
-        this.contactDetails.push(res[0])
-      })
-    })
+      }
+    )
   }
 
   updateContact(){
     this.loading = true;
-    this.getContactDetails();
+    this.getUserId();
   }
 }

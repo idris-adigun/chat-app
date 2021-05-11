@@ -9,11 +9,11 @@
             </div>
         </div>
     </div>
-    <div *ngIf="contactDetails.length <= 0" style="text-align: center;">
+    <div *ngIf="myContacts.length <= 0" style="text-align: center;">
         No contact added!
     </div>
     <div  *ngIf="!loading">
-        <div *ngFor="let contact of contactDetails">
+        <div *ngFor="let contact of myContacts">
             <div class="contact-list">
                 <div class="profile">
                     <img class="profile-image"  *ngIf="contact.profileImageUrl" src="{{contact.profileImageUrl}}" class="profile-image">
